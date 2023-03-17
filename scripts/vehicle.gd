@@ -29,7 +29,7 @@ func normal(delta, input):
 		movement_mode = MovementMode.SLIDING
 	
 	if velocity.length_squared() > STEERING_THRESHOLD:
-		$mesh_instance.rotation.y += input['steering'] * grip * 5 * delta
+		$mesh_instance.rotation.y += input['steering'] * grip * 3 * delta
 	
 	scalar_speed += acceleration * input['acceleration'] * delta
 	scalar_speed -= sign(scalar_speed) * damping * delta
@@ -38,9 +38,13 @@ func normal(delta, input):
 	velocity = Vector3(0, 0, scalar_speed).rotated(Vector3(0, 1, 0), $mesh_instance.rotation.y)
 
 func slide(delta, input):
-	if not input['handbrake'] and velocity.angle_to(Vector3(0, 0, 1).rotated(Vector3(0, 1, 0), $mesh_instance.rotation.y)) < deg_to_rad(15):
-		scalar_speed = velocity.length()
-		movement_mode = MovementMode.NORMAL
+	if not input['handbrake']:
+		if velocity.angle_to(Vector3(0, 0, 1).rotated(Vector3(0, 1, 0), $mesh_instance.rotation.y)) < deg_to_rad(15):
+			scalar_speed = velocity.length()
+			movement_mode = MovementMode.NORMAL
+		elif velocity.angle_to(Vector3(0, 0, -1).rotated(Vector3(0, 1, 0), $mesh_instance.rotation.y)) < deg_to_rad(15):
+			scalar_speed = -velocity.length()
+			movement_mode = MovementMode.NORMAL
 	
 	if velocity.length_squared() > STEERING_THRESHOLD:
 		$mesh_instance.rotation.y += input['steering'] * grip * 5 * delta
