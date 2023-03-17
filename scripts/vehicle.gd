@@ -1,3 +1,4 @@
+class_name Vehicle
 extends CharacterBody3D
 
 const STEERING_THRESHOLD = 0.2
