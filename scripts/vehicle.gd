@@ -106,6 +106,8 @@ func _physics_process(delta):
 		if movement_mode != MovementMode.NORMAL:
 			movement_mode = MovementMode.NORMAL
 			scalar_speed = 0
+		if input['acceleration'] == 0:
+			scalar_speed = 0
 	elif velocity.length_squared() > max_speed * max_speed:
 		velocity = velocity.normalized() * max_speed
 	
