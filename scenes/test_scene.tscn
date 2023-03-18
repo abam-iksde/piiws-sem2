@@ -1,6 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://birhi6buqignt"]
+[gd_scene load_steps=6 format=3 uid="uid://birhi6buqignt"]
 
 [ext_resource type="PackedScene" uid="uid://cxmeqa2nybtf5" path="res://scenes/prefabs/vehicle.tscn" id="1_u24ay"]
+[ext_resource type="Texture2D" uid="uid://bgy8mlrvddxqb" path="res://textures/wall.png" id="2_r52x6"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pvmoo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o22u4"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+shading_mode = 0
+albedo_texture = ExtResource("2_r52x6")
+texture_filter = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dgob6"]
+size = Vector3(2, 2, 2)
 
 [node name="test_scene" type="Node3D"]
 
@@ -11,3 +25,13 @@ transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08,
 projection = 1
 current = true
 size = 20.0
+
+[node name="wall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.08165e-12, 2.08165e-12)
+
+[node name="mesh_instance" type="MeshInstance3D" parent="wall"]
+mesh = SubResource("PlaneMesh_pvmoo")
+surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
+
+[node name="collision_shape" type="CollisionShape3D" parent="wall"]
+shape = SubResource("BoxShape3D_dgob6")
