@@ -5,6 +5,7 @@ const STEERING_THRESHOLD = 0.2
 const DRIFT_EXIT_THRESHOLD = deg_to_rad(15)
 const GRIPPING_TIME_AFTER_HIT = 0.3
 const GRIPPING_TIME_AFTER_HANDBRAKE = 0.1
+const FORCE_HIT_MULTIPLIER = 0.7
 
 @export var max_speed = 20
 @export var acceleration = 32
@@ -73,7 +74,7 @@ func check_collisions():
 	if get_slide_collision_count() == 0 or velocity.length_squared() < 0.5:
 		return
 	var collision = get_last_slide_collision()
-	velocity = velocity_last_frame.bounce(collision.get_normal())
+	velocity = velocity_last_frame.bounce(collision.get_normal()) * FORCE_HIT_MULTIPLIER
 	movement_mode = MovementMode.SLIDING
 	gripping_time = GRIPPING_TIME_AFTER_HIT
 	slide_steering_multiplier = 1
