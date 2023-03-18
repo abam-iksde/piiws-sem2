@@ -2,6 +2,7 @@ class_name Vehicle
 extends CharacterBody3D
 
 const STEERING_THRESHOLD = 0.2
+const DRIFT_EXIT_THRESHOLD = deg_to_rad(15)
 
 @export var max_speed = 20
 @export var acceleration = 32
@@ -39,10 +40,10 @@ func normal(delta, input):
 
 func slide(delta, input):
 	if not input['handbrake']:
-		if velocity.angle_to(Vector3(0, 0, 1).rotated(Vector3(0, 1, 0), $mesh_instance.rotation.y)) < deg_to_rad(15):
+		if velocity.angle_to(Vector3(0, 0, 1).rotated(Vector3(0, 1, 0), $mesh_instance.rotation.y)) < DRIFT_EXIT_THRESHOLD:
 			scalar_speed = velocity.length()
 			movement_mode = MovementMode.NORMAL
-		elif velocity.angle_to(Vector3(0, 0, -1).rotated(Vector3(0, 1, 0), $mesh_instance.rotation.y)) < deg_to_rad(15):
+		elif velocity.angle_to(Vector3(0, 0, -1).rotated(Vector3(0, 1, 0), $mesh_instance.rotation.y)) < DRIFT_EXIT_THRESHOLD:
 			scalar_speed = -velocity.length()
 			movement_mode = MovementMode.NORMAL
 	
