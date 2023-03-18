@@ -76,6 +76,7 @@ func check_collisions():
 	velocity = last_velocity.bounce(collision.get_normal())
 	movement_mode = MovementMode.SLIDING
 	gripping_time = GRIPPING_TIME_AFTER_HIT
+	slide_steering_multiplier = 1
 
 func process_smoke():
 	var timer = get_tree().create_timer(0.02)
