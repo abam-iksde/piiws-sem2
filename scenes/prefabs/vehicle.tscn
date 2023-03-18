@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://cxmeqa2nybtf5"]
+
+[ext_resource type="Script" path="res://scripts/vehicle.gd" id="1_ae525"]
+[ext_resource type="Texture2D" uid="uid://dyglbdxn8l8lo" path="res://textures/vehicles/car_red.png" id="2_ea7sl"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ypeme"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uetc2"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+shading_mode = 0
+albedo_texture = ExtResource("2_ea7sl")
+texture_filter = 0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_m2byr"]
+radius = 0.56
+
+[node name="vehicle" type="CharacterBody3D"]
+script = ExtResource("1_ae525")
+
+[node name="mesh_instance" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_ypeme")
+surface_material_override/0 = SubResource("StandardMaterial3D_uetc2")
+
+[node name="collision_shape" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_m2byr")
