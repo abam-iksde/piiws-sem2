@@ -65,10 +65,10 @@ func slide(delta, input):
 		$sprite.rotation.y += input['steering'] * grip * 5 * delta * slide_steering_multiplier
 	
 	velocity += Vector3(0, 0, acceleration * input['acceleration']).rotated(Vector3(0, 1, 0), $sprite.rotation.y) * delta
-	velocity -= velocity.normalized() * damping * delta
+	velocity -= velocity.normalized() * damping * 1.5 * delta
 
 func check_collisions():
-	if get_slide_collision_count() == 0:
+	if get_slide_collision_count() == 0 or velocity.length_squared() < 0.5:
 		return
 	var collision = get_last_slide_collision()
 	velocity = velocity.bounce(collision.get_normal())
@@ -100,7 +100,9 @@ func _physics_process(delta):
 	check_collisions()
 	
 	if velocity.length_squared() < STEERING_THRESHOLD:
-		velocity = Vector3()
+		if movement_mode != MovementMode.NORMAL:
+			movement_mode = MovementMode.NORMAL
+			scalar_speed = 0
 	elif velocity.length_squared() > max_speed * max_speed:
 		velocity = velocity.normalized() * max_speed
 	
