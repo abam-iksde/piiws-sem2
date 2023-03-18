@@ -15,7 +15,7 @@ var gripping_time = 0
 
 var scalar_speed = 0
 
-var last_velocity = null
+var velocity_last_frame = null
 
 enum MovementMode {
 	NORMAL,
@@ -73,7 +73,7 @@ func check_collisions():
 	if get_slide_collision_count() == 0 or velocity.length_squared() < 0.5:
 		return
 	var collision = get_last_slide_collision()
-	velocity = last_velocity.bounce(collision.get_normal())
+	velocity = velocity_last_frame.bounce(collision.get_normal())
 	movement_mode = MovementMode.SLIDING
 	gripping_time = GRIPPING_TIME_AFTER_HIT
 	slide_steering_multiplier = 1
@@ -111,5 +111,5 @@ func _physics_process(delta):
 	elif velocity.length_squared() > max_speed * max_speed:
 		velocity = velocity.normalized() * max_speed
 	
-	last_velocity = velocity
+	velocity_last_frame = velocity
 	move_and_slide()
