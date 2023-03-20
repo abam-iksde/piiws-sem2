@@ -26,12 +26,7 @@ enum MovementMode {
 var movement_mode = MovementMode.NORMAL
 var slide_steering_multiplier = 1
 
-func get_input():
-	return {
-		'acceleration': Input.get_axis("ui_down", "ui_up"),
-		'steering': Input.get_axis("ui_right", "ui_left"),
-		'handbrake': Input.is_action_pressed('ui_accept'),
-	}
+var input_manager = InputManagerHuman.new('p1')
 
 func normal(delta, input):
 	if input['handbrake']:
@@ -93,7 +88,7 @@ func _ready():
 	process_smoke.call_deferred()
 
 func _physics_process(delta):
-	var input = get_input()
+	var input = input_manager.get_input()
 	
 	match movement_mode:
 		MovementMode.NORMAL:
