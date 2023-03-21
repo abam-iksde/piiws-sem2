@@ -13,13 +13,13 @@ func get_target_direction():
   var item = path_map.get_cell_item(grid_position)
   match item:
     0:
-      return deg_to_rad(90)
+      return Angles.right
     1:
-      return deg_to_rad(-90)
+      return Angles.left
     2:
-      return deg_to_rad(180)
+      return Angles.up
     3:
-      return 0
+      return Angles.down
   return null
 
 func get_input():
