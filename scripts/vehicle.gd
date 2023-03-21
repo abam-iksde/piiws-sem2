@@ -1,6 +1,11 @@
 class_name Vehicle
 extends CharacterBody3D
 
+@export var texture: Texture = null
+
+@export_enum('human', 'npc') var control_type = 'human'
+@export var control_metadata: String = ''
+
 const STEERING_THRESHOLD = 0.2
 const DRIFT_EXIT_THRESHOLD = deg_to_rad(15)
 const GRIPPING_TIME_AFTER_HIT = 0.3
@@ -26,7 +31,14 @@ enum MovementMode {
 var movement_mode = MovementMode.NORMAL
 var slide_steering_multiplier = 1
 
-var input_manager = InputManagerHuman.new('p1')
+var input_manager
+
+func init_control():
+  match control_type:
+    'human':
+      input_manager = InputManagerHuman.new(control_metadata, self)
+    'npc':
+      input_manager = InputManagerNPC.new(control_metadata, self)
 
 func normal(delta, input):
   if input['handbrake']:
@@ -86,6 +98,10 @@ func process_smoke():
 
 func _ready():
   process_smoke.call_deferred()
+  init_control()
+  
+  if texture != null:
+    $sprite.texture = texture
 
 func _physics_process(delta):
   var input = input_manager.get_input()
