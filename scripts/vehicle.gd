@@ -62,7 +62,7 @@ func slide(delta, input):
   if velocity.length_squared() > STEERING_THRESHOLD:
     $sprite.rotation.y += input['steering'] * grip * 5 * delta * slide_steering_multiplier
   
-  velocity += Vector3(0, 0, acceleration * 0.8 * input['acceleration']).rotated(Vector3(0, 1, 0), $sprite.rotation.y) * delta
+  velocity += Vector3(0, 0, acceleration * 0.85 * input['acceleration']).rotated(Vector3(0, 1, 0), $sprite.rotation.y) * delta
   velocity -= velocity.normalized() * damping * 1.5 * delta
 
 func check_collisions():
@@ -75,7 +75,7 @@ func check_collisions():
   slide_steering_multiplier = 1
 
 func process_smoke():
-  var timer = get_tree().create_timer(0.02)
+  var timer = get_tree().create_timer(0.01)
   timer.connect('timeout', process_smoke)
   if movement_mode != MovementMode.SLIDING:
     return
