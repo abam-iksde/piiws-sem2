@@ -1,9 +1,9 @@
 class_name InputManagerHuman
-extends InputManager
+extends Object
 
 var prefix
 
-func _init(_prefix):
+func _init(_prefix, _node):
   prefix = _prefix
 
 func get_input():
