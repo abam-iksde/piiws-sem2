@@ -11,6 +11,7 @@ const DRIFT_EXIT_THRESHOLD = deg_to_rad(15)
 const GRIPPING_TIME_AFTER_HIT = 0.3
 const GRIPPING_TIME_AFTER_HANDBRAKE = 0.1
 const FORCE_HIT_MULTIPLIER = 0.7
+const VEHICLE_COLLISION_BASE_FORCE = 10
 
 @export var max_speed = 20
 @export var acceleration = 32
@@ -81,10 +82,31 @@ func check_collisions():
   if get_slide_collision_count() == 0 or velocity.length_squared() < 0.5:
     return
   var collision = get_last_slide_collision()
+  var collider = collision.get_collider()
+  if collider is Vehicle:
+    handle_vehicle_collision(collider)
+  else:
+    handle_wall_collision(collision)
+
+func handle_wall_collision(collision):
   velocity = velocity_last_frame.bounce(collision.get_normal()) * FORCE_HIT_MULTIPLIER
   movement_mode = MovementMode.SLIDING
   gripping_time = GRIPPING_TIME_AFTER_HIT
   slide_steering_multiplier = 1
+
+func handle_vehicle_collision(vehicle):
+  if RegisteredCollisions.registered_vehicle_collisions.has(str(vehicle.get_path()) + str(get_path())):
+    return
+  set_velocity_after_vehicle_hit(self, vehicle)
+  set_velocity_after_vehicle_hit(vehicle, self)
+  RegisteredCollisions.registered_vehicle_collisions.append(str(get_path()) + str(vehicle.get_path()))
+
+func set_velocity_after_vehicle_hit(me, them):
+  var normal = (me.global_position - them.global_position).normalized()
+  me.velocity = me.velocity_last_frame * 0.7 + normal * (me.velocity_last_frame.length() + them.velocity_last_frame.length() + VEHICLE_COLLISION_BASE_FORCE) * 0.3
+  me.movement_mode = MovementMode.SLIDING
+  me.gripping_time = GRIPPING_TIME_AFTER_HIT
+  me.slide_steering_multiplier = 1
 
 func process_smoke():
   var timer = get_tree().create_timer(0.01)
