@@ -20,6 +20,14 @@ func get_target_direction():
       return Angles.up
     3:
       return Angles.down
+    4:
+      return Angles.diagonal_down_right
+    5:
+      return Angles.diagonal_up_left
+    6:
+      return Angles.diagonal_up_right
+    7:
+      return Angles.diagonal_down_left
   return null
 
 func get_input():
