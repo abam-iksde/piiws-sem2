@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Angles="*res://scripts/angles.gd"
 RegisteredCollisions="*res://scripts/registered_collisions.gd"
+GameSettings="*res://scripts/game_settings.gd"
 
 [display]
 
