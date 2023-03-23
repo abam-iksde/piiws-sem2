@@ -28,4 +28,6 @@ func get_angle_from_index(_index):
       return diagonal_up_right
     7:
       return diagonal_down_left
-  return null
+  # mathematically not allowed to happen,
+  # but math sometimes fails
+  return 0
