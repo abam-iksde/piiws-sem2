@@ -6,7 +6,7 @@ extends CharacterBody3D
 @export_enum('human', 'npc') var control_type = 'human'
 @export var control_metadata: String = ''
 
-const STEERING_THRESHOLD = 0.2
+const STEERING_THRESHOLD = 0.1
 const DRIFT_EXIT_THRESHOLD = deg_to_rad(15)
 const GRIPPING_TIME_AFTER_HIT = 0.3
 const GRIPPING_TIME_AFTER_HANDBRAKE = 0.1
