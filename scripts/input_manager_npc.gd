@@ -11,24 +11,7 @@ func get_target_direction():
   var local_position = node.global_position - path_map.global_position
   var grid_position = path_map.local_to_map(local_position)
   var item = path_map.get_cell_item(grid_position)
-  match item:
-    0:
-      return Angles.right
-    1:
-      return Angles.left
-    2:
-      return Angles.up
-    3:
-      return Angles.down
-    4:
-      return Angles.diagonal_down_right
-    5:
-      return Angles.diagonal_up_left
-    6:
-      return Angles.diagonal_up_right
-    7:
-      return Angles.diagonal_down_left
-  return null
+  return Angles.get_angle_from_index(item)
 
 func get_input():
   var steering = 0

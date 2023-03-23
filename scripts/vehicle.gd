@@ -13,6 +13,12 @@ const GRIPPING_TIME_AFTER_HANDBRAKE = 0.1
 const FORCE_HIT_MULTIPLIER = 0.7
 const VEHICLE_COLLISION_BASE_FORCE = 10
 
+const NORMAL_GRIP_MULTIPLIER = 3
+const SLIDING_GRIP_MULTIPLIER = 5
+const SLIDING_ACCELERATION_MULTIPLIER = 0.85
+const COLLISION_VELOCITY_MULTIPLIER = 0.7
+const SLIDING_DAMPING_MULTIPLIER = 1.5
+
 @export var max_speed = 20
 @export var acceleration = 32
 @export var grip = 1
@@ -48,7 +54,7 @@ func normal(delta, input):
     gripping_time = GRIPPING_TIME_AFTER_HANDBRAKE
   
   if velocity.length_squared() > STEERING_THRESHOLD:
-    $sprite.rotation.y += input['steering'] * sign(scalar_speed) * grip * 3 * delta
+    $sprite.rotation.y += input['steering'] * sign(scalar_speed) * grip * NORMAL_GRIP_MULTIPLIER * delta
   
   scalar_speed += acceleration * input['acceleration'] * delta
   scalar_speed -= sign(scalar_speed) * damping * delta
@@ -73,10 +79,10 @@ func slide(delta, input):
     gripping_time = max(GRIPPING_TIME_AFTER_HANDBRAKE, gripping_time)
   
   if velocity.length_squared() > STEERING_THRESHOLD:
-    $sprite.rotation.y += input['steering'] * grip * 5 * delta * slide_steering_multiplier
+    $sprite.rotation.y += input['steering'] * grip * SLIDING_GRIP_MULTIPLIER * delta * slide_steering_multiplier
   
-  velocity += Vector3(0, 0, acceleration * 0.85 * input['acceleration']).rotated(Vector3(0, 1, 0), $sprite.rotation.y) * delta
-  velocity -= velocity.normalized() * damping * 1.5 * delta
+  velocity += Vector3(0, 0, acceleration * SLIDING_ACCELERATION_MULTIPLIER * input['acceleration']).rotated(Vector3(0, 1, 0), $sprite.rotation.y) * delta
+  velocity -= velocity.normalized() * damping * SLIDING_DAMPING_MULTIPLIER * delta
 
 func check_collisions():
   if get_slide_collision_count() == 0 or velocity.length_squared() < 0.5:
@@ -103,14 +109,12 @@ func handle_vehicle_collision(vehicle):
 
 func set_velocity_after_vehicle_hit(me, them):
   var normal = (me.global_position - them.global_position).normalized()
-  me.velocity = me.velocity_last_frame * 0.7 + normal * (me.velocity_last_frame.length() + them.velocity_last_frame.length() + VEHICLE_COLLISION_BASE_FORCE) * 0.3
+  me.velocity = me.velocity_last_frame * COLLISION_VELOCITY_MULTIPLIER + normal * (me.velocity_last_frame.length() + them.velocity_last_frame.length() + VEHICLE_COLLISION_BASE_FORCE) * 0.3
   me.movement_mode = MovementMode.SLIDING
   me.gripping_time = GRIPPING_TIME_AFTER_HIT
   me.slide_steering_multiplier = 1
 
 func process_smoke():
-  var timer = get_tree().create_timer(0.01)
-  timer.connect('timeout', process_smoke)
   if movement_mode != MovementMode.SLIDING:
     return
   for child in %tyres.get_children():
@@ -124,6 +128,8 @@ func _ready():
   
   if texture != null:
     $sprite.texture = texture
+  
+  $smoke_timer.connect('timeout', process_smoke)
 
 func _physics_process(delta):
   var input = input_manager.get_input()
