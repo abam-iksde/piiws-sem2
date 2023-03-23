@@ -34,3 +34,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.438163, 0, 0.7)
 
 [node name="4" type="Node3D" parent="sprite/tyres"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.438, 2.08165e-12, 0.7)
+
+[node name="smoke_timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.01
+autostart = true
