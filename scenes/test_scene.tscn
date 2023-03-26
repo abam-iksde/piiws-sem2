@@ -1,10 +1,16 @@
-[gd_scene load_steps=18 format=3 uid="uid://birhi6buqignt"]
+[gd_scene load_steps=22 format=3 uid="uid://birhi6buqignt"]
 
 [ext_resource type="Script" path="res://scripts/world_viewport_container.gd" id="1_dvp32"]
 [ext_resource type="PackedScene" uid="uid://cxmeqa2nybtf5" path="res://scenes/prefabs/vehicle.tscn" id="1_u24ay"]
 [ext_resource type="Texture2D" uid="uid://cc8mw4oil318l" path="res://textures/vehicles/car_blue.png" id="2_2jq3v"]
 [ext_resource type="Texture2D" uid="uid://bgy8mlrvddxqb" path="res://textures/wall.png" id="2_r52x6"]
 [ext_resource type="Script" path="res://scripts/floor_position_in_parent.gd" id="3_vslln"]
+[ext_resource type="Script" path="res://scripts/checkpoints_setter.gd" id="6_mlj2v"]
+[ext_resource type="Script" path="res://scripts/checkpoint.gd" id="6_njxko"]
+[ext_resource type="Script" path="res://scripts/lap_label.gd" id="8_78a11"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_csmlp"]
+size = Vector3(11, 1, 0.3)
 
 [sub_resource type="TextMesh" id="TextMesh_d4eoy"]
 text = "→"
@@ -117,6 +123,43 @@ script = ExtResource("1_dvp32")
 handle_input_locally = false
 size = Vector2i(1600, 900)
 render_target_update_mode = 4
+
+[node name="checkpoints" type="Node3D" parent="world_viewport_container/world_viewport"]
+script = ExtResource("6_mlj2v")
+
+[node name="cp1" type="Area3D" parent="world_viewport_container/world_viewport/checkpoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2.08165e-12, 1)
+collision_layer = 2147483648
+script = ExtResource("6_njxko")
+
+[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/checkpoints/cp1"]
+shape = SubResource("BoxShape3D_csmlp")
+
+[node name="cp2" type="Area3D" parent="world_viewport_container/world_viewport/checkpoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2.08165e-12, 7)
+collision_layer = 2147483648
+script = ExtResource("6_njxko")
+
+[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/checkpoints/cp2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_csmlp")
+
+[node name="cp3" type="Area3D" parent="world_viewport_container/world_viewport/checkpoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2.08165e-12, 1)
+collision_layer = 2147483648
+script = ExtResource("6_njxko")
+
+[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/checkpoints/cp3"]
+shape = SubResource("BoxShape3D_csmlp")
+
+[node name="cp4" type="Area3D" parent="world_viewport_container/world_viewport/checkpoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2.08165e-12, -5)
+collision_layer = 2147483648
+script = ExtResource("6_njxko")
+
+[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/checkpoints/cp4"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_csmlp")
 
 [node name="vehicle" parent="world_viewport_container/world_viewport" instance=ExtResource("1_u24ay")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.08165e-12, 1)
@@ -728,3 +771,11 @@ metadata/_edit_group_ = true
 
 [node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall47"]
 shape = SubResource("BoxShape3D_dgob6")
+
+[node name="lap_label" type="Label" parent="." node_paths=PackedStringArray("vehicle")]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 72
+text = "LAP: "
+script = ExtResource("8_78a11")
+vehicle = NodePath("../world_viewport_container/world_viewport/vehicle")

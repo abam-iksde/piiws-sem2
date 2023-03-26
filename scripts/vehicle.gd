@@ -40,6 +40,17 @@ var slide_steering_multiplier = 1
 
 var input_manager
 
+var previous_checkpoint = null
+var next_checkpoint = null
+var lap = null
+
+func collect_checkpoint(previous):
+  var next_checkpoint_data = Race.next_checkpoint(previous_checkpoint if previous else next_checkpoint, lap)
+  var previous_checkpoint_data = Race.next_checkpoint(previous_checkpoint if previous else next_checkpoint, lap, -1)
+  next_checkpoint = next_checkpoint_data.checkpoint
+  lap = previous_checkpoint_data.lap if previous else next_checkpoint_data.lap
+  previous_checkpoint = previous_checkpoint_data.checkpoint
+
 func init_control():
   match control_type:
     'human':
@@ -130,6 +141,7 @@ func _ready():
     $sprite.texture = texture
   
   $smoke_timer.connect('timeout', process_smoke)
+  collect_checkpoint(false)
 
 func _physics_process(delta):
   var input = input_manager.get_input()
