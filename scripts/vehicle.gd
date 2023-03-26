@@ -58,7 +58,7 @@ func init_control():
     'npc':
       input_manager = InputManagerNPC.new(control_metadata, self)
 
-func normal(delta, input):
+func mode_handler_normal(delta, input):
   if input['handbrake']:
     slide_steering_multiplier = sign(scalar_speed)
     movement_mode = MovementMode.SLIDING
@@ -73,7 +73,7 @@ func normal(delta, input):
     scalar_speed = max_speed * sign(scalar_speed)
   velocity = Vector3(0, 0, scalar_speed).rotated(Vector3(0, 1, 0), $sprite.rotation.y)
 
-func slide(delta, input):
+func mode_handler_slide(delta, input):
   gripping_time -= delta
   if not input['handbrake']:
     if velocity.angle_to(Vector3(0, 0, 1).rotated(Vector3(0, 1, 0), $sprite.rotation.y)) < DRIFT_EXIT_THRESHOLD:
@@ -152,10 +152,12 @@ func _ready():
   
   $smoke_timer.connect('timeout', process_smoke)
   collect_checkpoint(false)
+  
+  Race.players.append(self)
 
 var states_lookup = {
-  MovementMode.NORMAL: normal,
-  MovementMode.SLIDING: slide,
+  MovementMode.NORMAL: mode_handler_normal,
+  MovementMode.SLIDING: mode_handler_slide,
 }
 
 func _physics_process(delta):
