@@ -5,10 +5,14 @@ var laps
 
 var players = []
 var player_positions = {}
+var final_positions = {}
+var n_players_finished
 
 func init(_checkpoints, _laps):
   checkpoints = _checkpoints
   laps = _laps
+  final_positions = {}
+  n_players_finished = 0
 
 func next_checkpoint(checkpoint, lap, change=1):
   var current_index = 0
@@ -28,6 +32,10 @@ func next_checkpoint(checkpoint, lap, change=1):
 func _physics_process(delta):
   var player_progress = []
   for player in players:
+    if not final_positions.has(player) and player.lap > laps:
+      n_players_finished += 1
+      final_positions[player] = n_players_finished
+      player.finish_race()
     player_progress.append({
       player = player,
       lap = player.lap,
@@ -36,7 +44,7 @@ func _physics_process(delta):
     })
   player_progress.sort_custom(wrapped_progress_sort)
   for index in range(len(player_progress)):
-    player_positions[player_progress[index].player] = index+1
+    player_positions[player_progress[index].player] = index + 1 + n_players_finished
 
 func progress_sort(a, b):
   var laps_difference = b.lap - a.lap
@@ -55,6 +63,8 @@ func wrapped_progress_sort(a, b):
   return progress_sort(a, b) < 0
 
 func get_player_position(player):
+  if final_positions.has(player):
+    return final_positions[player]
   if player_positions.has(player):
     return player_positions[player]
   return 1

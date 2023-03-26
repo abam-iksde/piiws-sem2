@@ -43,6 +43,7 @@ var input_manager
 var previous_checkpoint = null
 var next_checkpoint = null
 var lap = null
+var race_done = false
 
 func collect_checkpoint(previous):
   var next_checkpoint_data = Race.next_checkpoint(previous_checkpoint if previous else next_checkpoint, lap)
@@ -51,7 +52,11 @@ func collect_checkpoint(previous):
   lap = previous_checkpoint_data.lap if previous else next_checkpoint_data.lap
   previous_checkpoint = previous_checkpoint_data.checkpoint
 
-func init_control():
+func finish_race():
+  init_control('npc', '')
+  race_done = true
+
+func init_control(control_type, control_metadata):
   match control_type:
     'human':
       input_manager = InputManagerHuman.new(control_metadata, self)
@@ -145,7 +150,7 @@ func process_smoke():
 
 func _ready():
   process_smoke.call_deferred()
-  init_control()
+  init_control(control_type, control_metadata)
   
   if texture != null:
     $sprite.texture = texture

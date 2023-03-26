@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dkv3ajkk1i5ff"]
+[gd_scene load_steps=24 format=3 uid="uid://dkv3ajkk1i5ff"]
 
 [ext_resource type="Script" path="res://scripts/visuals/world_viewport_container.gd" id="1_d8u7o"]
 [ext_resource type="PackedScene" uid="uid://cxmeqa2nybtf5" path="res://scenes/prefabs/game/vehicle.tscn" id="1_u24ay"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/visuals/floor_position_in_parent.gd" id="5_h67fg"]
 [ext_resource type="Script" path="res://scripts/ui/lap_label.gd" id="8_d8cbk"]
 [ext_resource type="Script" path="res://scripts/ui/position_label.gd" id="9_6p8v7"]
+[ext_resource type="Script" path="res://scripts/ui/verdict_label.gd" id="10_q7ujv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_csmlp"]
 size = Vector3(11, 1, 0.3)
@@ -788,4 +789,16 @@ offset_bottom = 174.0
 theme_override_font_sizes/font_size = 72
 text = "pos: "
 script = ExtResource("9_6p8v7")
+vehicle = NodePath("../world_viewport_container/world_viewport/vehicle")
+
+[node name="verdict_label" type="Label" parent="." node_paths=PackedStringArray("vehicle")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 128
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("10_q7ujv")
 vehicle = NodePath("../world_viewport_container/world_viewport/vehicle")
