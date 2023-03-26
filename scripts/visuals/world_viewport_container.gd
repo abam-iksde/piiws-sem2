@@ -8,5 +8,5 @@ func on_screen_resize():
 func _ready():
   if not GameSettings.pixelated_look:
     return
-  get_viewport().connect("size_changed", on_screen_resize)
+  get_viewport().connect('size_changed', on_screen_resize)
   on_screen_resize()
