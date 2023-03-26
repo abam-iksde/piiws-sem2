@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://birhi6buqignt"]
+[gd_scene load_steps=23 format=3 uid="uid://birhi6buqignt"]
 
 [ext_resource type="Script" path="res://scripts/world_viewport_container.gd" id="1_dvp32"]
 [ext_resource type="PackedScene" uid="uid://cxmeqa2nybtf5" path="res://scenes/prefabs/vehicle.tscn" id="1_u24ay"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/checkpoints_setter.gd" id="6_mlj2v"]
 [ext_resource type="Script" path="res://scripts/checkpoint.gd" id="6_njxko"]
 [ext_resource type="Script" path="res://scripts/lap_label.gd" id="8_78a11"]
+[ext_resource type="Script" path="res://scripts/position_label.gd" id="9_puj1n"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_csmlp"]
 size = Vector3(11, 1, 0.3)
@@ -778,4 +779,13 @@ offset_bottom = 23.0
 theme_override_font_sizes/font_size = 72
 text = "LAP: "
 script = ExtResource("8_78a11")
+vehicle = NodePath("../world_viewport_container/world_viewport/vehicle")
+
+[node name="position_label" type="Label" parent="." node_paths=PackedStringArray("vehicle")]
+offset_top = 72.0
+offset_right = 163.0
+offset_bottom = 174.0
+theme_override_font_sizes/font_size = 72
+text = "pos: "
+script = ExtResource("9_puj1n")
 vehicle = NodePath("../world_viewport_container/world_viewport/vehicle")
