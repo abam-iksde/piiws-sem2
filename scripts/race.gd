@@ -9,6 +9,7 @@ func init(_checkpoints, _laps):
 
 func next_checkpoint(checkpoint, lap, change=1):
   var current_index = 0
+  if not lap: lap = 0
   if checkpoint != null:
     current_index = checkpoints.find(checkpoint)
   var next_index = wrapi(current_index+change, 0, len(checkpoints))
