@@ -39,8 +39,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.438, 2.08165e-12, 0.7)
 process_callback = 0
 wait_time = 0.01
 autostart = true
-
-[node name="checkpoint_raycast" type="RayCast3D" parent="."]
-collision_mask = 2147483648
-collide_with_areas = true
-collide_with_bodies = false
