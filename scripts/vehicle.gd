@@ -105,6 +105,16 @@ func check_collisions():
   else:
     handle_wall_collision(collision)
 
+func check_slide_exit(input):
+  if velocity.length_squared() < STEERING_THRESHOLD:
+    if movement_mode != MovementMode.NORMAL:
+      movement_mode = MovementMode.NORMAL
+      scalar_speed = 0
+    if input['acceleration'] == 0:
+      scalar_speed = 0
+  elif velocity.length_squared() > max_speed * max_speed:
+    velocity = velocity.normalized() * max_speed
+
 func handle_wall_collision(collision):
   velocity = velocity_last_frame.bounce(collision.get_normal()) * FORCE_HIT_MULTIPLIER
   movement_mode = MovementMode.SLIDING
@@ -143,25 +153,17 @@ func _ready():
   $smoke_timer.connect('timeout', process_smoke)
   collect_checkpoint(false)
 
+var states_lookup = {
+  MovementMode.NORMAL: normal,
+  MovementMode.SLIDING: slide,
+}
+
 func _physics_process(delta):
   var input = input_manager.get_input()
   
-  match movement_mode:
-    MovementMode.NORMAL:
-      normal(delta, input)
-    MovementMode.SLIDING:
-      slide(delta, input)
-  
+  states_lookup[movement_mode].call(delta, input)
   check_collisions()
-  
-  if velocity.length_squared() < STEERING_THRESHOLD:
-    if movement_mode != MovementMode.NORMAL:
-      movement_mode = MovementMode.NORMAL
-      scalar_speed = 0
-    if input['acceleration'] == 0:
-      scalar_speed = 0
-  elif velocity.length_squared() > max_speed * max_speed:
-    velocity = velocity.normalized() * max_speed
+  check_slide_exit(input)
   
   velocity_last_frame = velocity
   move_and_slide()
