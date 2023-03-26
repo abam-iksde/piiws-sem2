@@ -11,16 +11,17 @@ config_version=5
 [application]
 
 config/name="piiws-sem2"
-run/main_scene="res://scenes/test_scene.tscn"
+run/main_scene="res://scenes/scenes/test_scene.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Angles="*res://scripts/angles.gd"
-RegisteredCollisions="*res://scripts/registered_collisions.gd"
-GameSettings="*res://scripts/game_settings.gd"
-Race="*res://scripts/race.gd"
+Angles="*res://scripts/autoloads/angles.gd"
+RegisteredCollisions="*res://scripts/autoloads/registered_collisions.gd"
+GameSettings="*res://scripts/autoloads/game_settings.gd"
+Race="*res://scripts/autoloads/race.gd"
+Prefabs="*res://scripts/autoloads/prefabs.gd"
 
 [display]
 

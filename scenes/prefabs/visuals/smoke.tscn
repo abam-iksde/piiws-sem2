@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dcrqjmm2jwgt5"]
+[gd_scene load_steps=4 format=3 uid="uid://ckwpmq2suhauf"]
 
 [ext_resource type="Texture2D" uid="uid://b0skk6i3tdwyi" path="res://textures/smoke/smoke_background.png" id="1_cndwb"]
-[ext_resource type="Script" path="res://scripts/smoke.gd" id="2_htmub"]
+[ext_resource type="Script" path="res://scripts/visuals/smoke.gd" id="2_xqwtr"]
 [ext_resource type="Texture2D" uid="uid://c24jt2j1n3l7s" path="res://textures/smoke/smoke_foreground.png" id="3_mrree"]
 
 [node name="smoke" type="Node3D"]
@@ -14,7 +14,7 @@ texture_filter = 0
 texture = ExtResource("1_cndwb")
 hframes = 2
 vframes = 2
-script = ExtResource("2_htmub")
+script = ExtResource("2_xqwtr")
 
 [node name="sprite_foreground" type="Sprite3D" parent="."]
 transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, -0.08, 2.08165e-12)
@@ -24,4 +24,4 @@ texture_filter = 0
 texture = ExtResource("3_mrree")
 hframes = 2
 vframes = 2
-script = ExtResource("2_htmub")
+script = ExtResource("2_xqwtr")
