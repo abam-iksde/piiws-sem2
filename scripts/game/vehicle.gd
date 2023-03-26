@@ -139,7 +139,7 @@ func process_smoke():
   if movement_mode != MovementMode.SLIDING:
     return
   for child in %tyres.get_children():
-    var instance = preload('res://scenes/prefabs/smoke.tscn').instantiate()
+    var instance = load(Prefabs.smoke).instantiate()
     get_node('..').add_child(instance)
     instance.global_position = child.global_position
 
