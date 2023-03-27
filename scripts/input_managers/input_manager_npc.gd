@@ -7,6 +7,9 @@ var metadata
 var node
 var path_map
 
+func angle_to_angle(from, to):
+  return fposmod(to-from + PI, PI*2) - PI
+
 func get_target_direction():
   var local_position = node.global_position - path_map.global_position
   var grid_position = path_map.local_to_map(local_position)
@@ -19,12 +22,12 @@ func get_input():
   var target_direction = get_target_direction()
   if target_direction != null:
     var sprite = node.get_node('sprite')
-    var angle_difference = lerp_angle(sprite.rotation.y, target_direction, PI) - sprite.rotation.y
+    var angle_difference = angle_to_angle(sprite.rotation.y, target_direction)
     if angle_difference > 0:
       steering = 1
     elif angle_difference < 0:
       steering = -1
-    handbrake = abs(angle_difference) > deg_to_rad(75) and node.velocity.length_squared() > HANDBRAKE_THRESHOLD * HANDBRAKE_THRESHOLD
+    handbrake = abs(angle_difference) > deg_to_rad(50) and node.velocity.length_squared() > HANDBRAKE_THRESHOLD * HANDBRAKE_THRESHOLD
   return {
     'acceleration': 1,
     'steering': steering,
