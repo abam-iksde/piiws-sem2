@@ -29,9 +29,9 @@ func get_input():
       steering = -1
     handbrake = abs(angle_difference) > deg_to_rad(50) and node.velocity.length_squared() > HANDBRAKE_THRESHOLD * HANDBRAKE_THRESHOLD
   return {
-    'acceleration': 1,
-    'steering': steering,
-    'handbrake': handbrake,
+    acceleration = 1,
+    steering = steering,
+    handbrake = handbrake,
   }
 
 func _init(_metadata, _node):
