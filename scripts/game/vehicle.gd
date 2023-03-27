@@ -64,15 +64,15 @@ func init_control(control_type, control_metadata):
       input_manager = InputManagerNPC.new(control_metadata, self)
 
 func mode_handler_normal(delta, input):
-  if input['handbrake']:
+  if input.handbrake:
     slide_steering_multiplier = sign(scalar_speed)
     movement_mode = MovementMode.SLIDING
     gripping_time = GRIPPING_TIME_AFTER_HANDBRAKE
   
   if velocity.length_squared() > STEERING_THRESHOLD:
-    $sprite.rotation.y += input['steering'] * sign(scalar_speed) * grip * NORMAL_GRIP_MULTIPLIER * delta
+    $sprite.rotation.y += input.steering * sign(scalar_speed) * grip * NORMAL_GRIP_MULTIPLIER * delta
   
-  scalar_speed += acceleration * input['acceleration'] * delta
+  scalar_speed += acceleration * input.acceleration * delta
   scalar_speed -= sign(scalar_speed) * damping * delta
   if abs(scalar_speed) > max_speed:
     scalar_speed = max_speed * sign(scalar_speed)
@@ -80,7 +80,7 @@ func mode_handler_normal(delta, input):
 
 func mode_handler_slide(delta, input):
   gripping_time -= delta
-  if not input['handbrake']:
+  if not input.handbrake:
     if velocity.angle_to(Vector3(0, 0, 1).rotated(Vector3(0, 1, 0), $sprite.rotation.y)) < DRIFT_EXIT_THRESHOLD:
       if gripping_time <= 0:
         scalar_speed = velocity.length()
@@ -95,9 +95,9 @@ func mode_handler_slide(delta, input):
     gripping_time = max(GRIPPING_TIME_AFTER_HANDBRAKE, gripping_time)
   
   if velocity.length_squared() > STEERING_THRESHOLD:
-    $sprite.rotation.y += input['steering'] * grip * SLIDING_GRIP_MULTIPLIER * delta * slide_steering_multiplier
+    $sprite.rotation.y += input.steering * grip * SLIDING_GRIP_MULTIPLIER * delta * slide_steering_multiplier
   
-  velocity += Vector3(0, 0, acceleration * SLIDING_ACCELERATION_MULTIPLIER * input['acceleration']).rotated(Vector3(0, 1, 0), $sprite.rotation.y) * delta
+  velocity += Vector3(0, 0, acceleration * SLIDING_ACCELERATION_MULTIPLIER * input.acceleration).rotated(Vector3(0, 1, 0), $sprite.rotation.y) * delta
   velocity -= velocity.normalized() * damping * SLIDING_DAMPING_MULTIPLIER * delta
 
 func check_collisions():
@@ -115,7 +115,7 @@ func check_slide_exit(input):
     if movement_mode != MovementMode.NORMAL:
       movement_mode = MovementMode.NORMAL
       scalar_speed = 0
-    if input['acceleration'] == 0:
+    if input.acceleration == 0:
       scalar_speed = 0
   elif velocity.length_squared() > max_speed * max_speed:
     velocity = velocity.normalized() * max_speed
