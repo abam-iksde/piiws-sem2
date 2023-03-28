@@ -8,7 +8,7 @@ var player_positions = {}
 var final_positions = {}
 var n_players_finished
 var race_started
-var countdown = 5
+var countdown
 
 func init(_checkpoints, _laps):
   checkpoints = _checkpoints
@@ -16,6 +16,7 @@ func init(_checkpoints, _laps):
   final_positions = {}
   n_players_finished = 0
   race_started = false
+  countdown = 5
   start_race()
 
 func next_checkpoint(checkpoint, lap, change=1):
@@ -86,4 +87,4 @@ func start_race():
   race_started = true
   countdown = 1
   await get_tree().create_timer(1).timeout
-  countdown = 0  
+  countdown = 0
