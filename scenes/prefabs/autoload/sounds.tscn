@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dagmirpolfifq"]
+
+[ext_resource type="AudioStream" uid="uid://bhlgminlr0hrr" path="res://sounds/countdown/countdown.mp3" id="1_pvp0q"]
+
+[node name="sounds" type="Node"]
+
+[node name="countdown" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_pvp0q")

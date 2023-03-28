@@ -7,12 +7,16 @@ var players = []
 var player_positions = {}
 var final_positions = {}
 var n_players_finished
+var race_started
+var countdown = 5
 
 func init(_checkpoints, _laps):
   checkpoints = _checkpoints
   laps = _laps
   final_positions = {}
   n_players_finished = 0
+  race_started = false
+  start_race()
 
 func next_checkpoint(checkpoint, lap, change=1):
   var current_index = 0
@@ -68,3 +72,17 @@ func get_player_position(player):
   if player_positions.has(player):
     return player_positions[player]
   return 1
+
+func start_race():
+  await get_tree().create_timer(2).timeout
+  Sounds.get_node('countdown').play()
+  countdown = 4
+  await get_tree().create_timer(1).timeout
+  countdown = 3
+  await get_tree().create_timer(1).timeout
+  countdown = 2
+  await get_tree().create_timer(1).timeout
+  race_started = true
+  countdown = 1
+  await get_tree().create_timer(1).timeout
+  countdown = 0  
