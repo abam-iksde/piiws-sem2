@@ -40,12 +40,13 @@ func _physics_process(delta):
       n_players_finished += 1
       final_positions[player] = n_players_finished
       player.finish_race()
-    player_progress.append({
-      player = player,
-      lap = player.lap,
-      checkpoint = checkpoints.find(player.next_checkpoint),
-      next_distance = player.global_position.distance_squared_to(player.next_checkpoint.global_position),
-    })
+    if not player.race_done:
+      player_progress.append({
+        player = player,
+        lap = player.lap,
+        checkpoint = checkpoints.find(player.next_checkpoint),
+        next_distance = player.global_position.distance_squared_to(player.next_checkpoint.global_position),
+      })
   player_progress.sort_custom(wrapped_progress_sort)
   for index in range(len(player_progress)):
     player_positions[player_progress[index].player] = index + 1 + n_players_finished
