@@ -22,6 +22,7 @@ RegisteredCollisions="*res://scripts/autoloads/registered_collisions.gd"
 GameSettings="*res://scripts/autoloads/game_settings.gd"
 Race="*res://scripts/autoloads/race.gd"
 Prefabs="*res://scripts/autoloads/prefabs.gd"
+Sounds="*res://scenes/prefabs/autoload/sounds.tscn"
 
 [display]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dkv3ajkk1i5ff"]
+[gd_scene load_steps=28 format=3 uid="uid://dkv3ajkk1i5ff"]
 
 [ext_resource type="Script" path="res://scripts/visuals/world_viewport_container.gd" id="1_d8u7o"]
 [ext_resource type="PackedScene" uid="uid://cxmeqa2nybtf5" path="res://scenes/prefabs/game/vehicle.tscn" id="1_u24ay"]
@@ -7,9 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://bgy8mlrvddxqb" path="res://textures/wall.png" id="2_r52x6"]
 [ext_resource type="Script" path="res://scripts/game/checkpoint.gd" id="3_6dk8c"]
 [ext_resource type="Script" path="res://scripts/visuals/floor_position_in_parent.gd" id="5_h67fg"]
+[ext_resource type="Script" path="res://scripts/ui/ui.gd" id="8_bjifc"]
 [ext_resource type="Script" path="res://scripts/ui/lap_label.gd" id="8_d8cbk"]
 [ext_resource type="Script" path="res://scripts/ui/position_label.gd" id="9_6p8v7"]
 [ext_resource type="Script" path="res://scripts/ui/verdict_label.gd" id="10_q7ujv"]
+[ext_resource type="Texture2D" uid="uid://cv14eivv6xt08" path="res://textures/countdown/countdown_back.png" id="12_bjjjx"]
+[ext_resource type="Texture2D" uid="uid://cy7eoyno68yg1" path="res://textures/countdown/countdown_front.png" id="13_p064k"]
+[ext_resource type="Script" path="res://scripts/ui/countdown.gd" id="14_0h7fl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_csmlp"]
 size = Vector3(11, 1, 0.3)
@@ -774,31 +778,62 @@ metadata/_edit_group_ = true
 [node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall47"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="lap_label" type="Label" parent="." node_paths=PackedStringArray("vehicle")]
-offset_right = 40.0
-offset_bottom = 23.0
-theme_override_font_sizes/font_size = 72
+[node name="ui" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 426.0
+offset_bottom = 320.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("8_bjifc")
+
+[node name="lap_label" type="Label" parent="ui" node_paths=PackedStringArray("vehicle")]
+layout_mode = 0
+offset_right = 170.0
+offset_bottom = 102.0
+theme_override_font_sizes/font_size = 16
 text = "LAP: "
 script = ExtResource("8_d8cbk")
-vehicle = NodePath("../world_viewport_container/world_viewport/vehicle")
+vehicle = NodePath("../../world_viewport_container/world_viewport/vehicle")
 
-[node name="position_label" type="Label" parent="." node_paths=PackedStringArray("vehicle")]
-offset_top = 72.0
+[node name="position_label" type="Label" parent="ui" node_paths=PackedStringArray("vehicle")]
+layout_mode = 0
+offset_top = 16.0
 offset_right = 163.0
-offset_bottom = 174.0
-theme_override_font_sizes/font_size = 72
+offset_bottom = 118.0
+theme_override_font_sizes/font_size = 16
 text = "pos: "
 script = ExtResource("9_6p8v7")
-vehicle = NodePath("../world_viewport_container/world_viewport/vehicle")
+vehicle = NodePath("../../world_viewport_container/world_viewport/vehicle")
 
-[node name="verdict_label" type="Label" parent="." node_paths=PackedStringArray("vehicle")]
+[node name="verdict_label" type="Label" parent="ui" node_paths=PackedStringArray("vehicle")]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 128
+theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("10_q7ujv")
-vehicle = NodePath("../world_viewport_container/world_viewport/vehicle")
+vehicle = NodePath("../../world_viewport_container/world_viewport/vehicle")
+
+[node name="countdown" type="TextureProgressBar" parent="ui"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -60.0
+offset_right = 64.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 4.0
+texture_under = ExtResource("12_bjjjx")
+texture_progress = ExtResource("13_p064k")
+script = ExtResource("14_0h7fl")

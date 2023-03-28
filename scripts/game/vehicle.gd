@@ -166,6 +166,8 @@ var states_lookup = {
 }
 
 func _physics_process(delta):
+  if not Race.race_started:
+    return
   var input = input_manager.get_input()
   
   states_lookup[movement_mode].call(delta, input)
