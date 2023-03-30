@@ -20,7 +20,7 @@ const COLLISION_VELOCITY_MULTIPLIER = 0.7
 const SLIDING_DAMPING_MULTIPLIER = 1.5
 
 @export var max_speed = 20
-@export var accel = 64
+@export var acceleration = 64
 @export var grip = 1
 @export var damping = 16
 
@@ -72,7 +72,7 @@ func mode_handler_normal(delta, input):
   if velocity.length_squared() > STEERING_THRESHOLD:
     $sprite.rotation.y += input.steering * sign(scalar_speed) * grip * NORMAL_GRIP_MULTIPLIER * delta
   
-  scalar_speed += accel * input.acceleration * delta
+  scalar_speed += acceleration * input.acceleration * delta
   scalar_speed -= sign(scalar_speed) * damping * delta
   if abs(scalar_speed) > max_speed:
     scalar_speed = max_speed * sign(scalar_speed)
@@ -97,7 +97,7 @@ func mode_handler_slide(delta, input):
   if velocity.length_squared() > STEERING_THRESHOLD:
     $sprite.rotation.y += input.steering * grip * SLIDING_GRIP_MULTIPLIER * delta * slide_steering_multiplier
   
-  velocity += Vector3(0, 0, accel * SLIDING_ACCELERATION_MULTIPLIER * input.acceleration).rotated(Vector3(0, 1, 0), $sprite.rotation.y) * delta
+  velocity += Vector3(0, 0, acceleration * SLIDING_ACCELERATION_MULTIPLIER * input.acceleration).rotated(Vector3(0, 1, 0), $sprite.rotation.y) * delta
   velocity -= velocity.normalized() * damping * SLIDING_DAMPING_MULTIPLIER * delta
 
 func check_collisions():
