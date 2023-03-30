@@ -20,7 +20,7 @@ const COLLISION_VELOCITY_MULTIPLIER = 0.7
 const SLIDING_DAMPING_MULTIPLIER = 1.5
 
 @export var max_speed = 20
-@export var acceleration = 64
+@export var acceleration = 32
 @export var grip = 1
 @export var damping = 16
 
