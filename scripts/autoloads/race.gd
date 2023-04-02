@@ -9,15 +9,43 @@ var final_positions = {}
 var n_players_finished
 var race_started
 var countdown
+var initialized = false
 
-func init(_checkpoints, _laps):
+func init(_checkpoints):
   checkpoints = _checkpoints
-  laps = _laps
+  laps = RaceSettings.get_setting('laps')
+  spawn_players()
   final_positions = {}
   n_players_finished = 0
   race_started = false
   countdown = 5
+  initialized = true
   start_race()
+
+func spawn_players():
+  for player in RaceSettings.get_setting('players'):
+    var player_node = preload('res://scenes/prefabs/game/vehicle.tscn').instantiate()
+    player_node.texture = player.texture
+    var scene_root = get_node('/root/test_scene')
+    player_node.control_type = player.input[0]
+    player_node.control_metadata = player.input[1]
+    scene_root.get_node('world').add_child(player_node)
+    player_node.global_position = scene_root.get_node('world/start_spots').get_child(player.start_spot).global_position
+    if player.viewport != null:
+      var viewport
+      if player.viewport[0] == 'singleplayer':
+        viewport = preload('res://scenes/prefabs/visuals/world_viewport_container_singleplayer.tscn').instantiate()
+        viewport.get_node('viewport/camera').parent = player_node
+      elif player.viewport[0] == 'splitscreen':
+        viewport = preload('res://scenes/prefabs/visuals/world_viewport_container_splitscreen.tscn').instantiate()
+        viewport.texture = player.viewport[1]
+        viewport.camera_parent = player_node
+        viewport.camera_screen_offset = player.viewport[2]
+      scene_root.get_node('player_viewports').add_child(viewport)
+    if player.is_main:
+      scene_root.get_node('ui/lap_label').vehicle = player_node
+      scene_root.get_node('ui/position_label').vehicle = player_node
+      scene_root.get_node('ui/verdict_label').vehicle = player_node
 
 func next_checkpoint(checkpoint, lap, change=1):
   var current_index = 0

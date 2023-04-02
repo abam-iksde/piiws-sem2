@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="piiws-sem2"
-run/main_scene="res://scenes/scenes/test_scene.tscn"
+run/main_scene="res://scenes/scenes/temp_menu.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -23,6 +23,7 @@ GameSettings="*res://scripts/autoloads/game_settings.gd"
 Race="*res://scripts/autoloads/race.gd"
 Prefabs="*res://scripts/autoloads/prefabs.gd"
 Sounds="*res://scenes/prefabs/autoload/sounds.tscn"
+RaceSettings="*res://scripts/autoloads/race_settings.gd"
 
 [display]
 

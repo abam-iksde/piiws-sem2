@@ -1,15 +1,11 @@
-[gd_scene load_steps=29 format=3 uid="uid://dkv3ajkk1i5ff"]
+[gd_scene load_steps=25 format=3 uid="uid://dkv3ajkk1i5ff"]
 
-[ext_resource type="PackedScene" uid="uid://cxmeqa2nybtf5" path="res://scenes/prefabs/game/vehicle.tscn" id="1_u24ay"]
-[ext_resource type="Texture2D" uid="uid://cc8mw4oil318l" path="res://textures/vehicles/car_blue.png" id="2_2jq3v"]
 [ext_resource type="Script" path="res://scripts/game/checkpoints_setter.gd" id="2_goyw0"]
 [ext_resource type="Texture2D" uid="uid://bgy8mlrvddxqb" path="res://textures/wall.png" id="2_r52x6"]
 [ext_resource type="Script" path="res://scripts/game/checkpoint.gd" id="3_6dk8c"]
-[ext_resource type="PackedScene" uid="uid://c82h6qmuasmhk" path="res://scenes/prefabs/visuals/world_viewport_container_splitscreen.tscn" id="6_sbco4"]
-[ext_resource type="Texture2D" uid="uid://bh1lkov04g0xp" path="res://textures/splitscreen/player1.png" id="7_q3440"]
+[ext_resource type="Script" path="res://scripts/game/path_map.gd" id="3_7pyt8"]
 [ext_resource type="Script" path="res://scripts/ui/ui.gd" id="8_bjifc"]
 [ext_resource type="Script" path="res://scripts/ui/lap_label.gd" id="8_d8cbk"]
-[ext_resource type="Texture2D" uid="uid://bdfu4jp47bltb" path="res://textures/splitscreen/player2.png" id="8_s5j4q"]
 [ext_resource type="Script" path="res://scripts/ui/position_label.gd" id="9_6p8v7"]
 [ext_resource type="Script" path="res://scripts/ui/verdict_label.gd" id="10_q7ujv"]
 [ext_resource type="Texture2D" uid="uid://cv14eivv6xt08" path="res://textures/countdown/countdown_back.png" id="12_bjjjx"]
@@ -155,22 +151,12 @@ script = ExtResource("3_6dk8c")
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 shape = SubResource("BoxShape3D_csmlp")
 
-[node name="vehicle" parent="world" instance=ExtResource("1_u24ay")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.08165e-12, 1)
-control_metadata = "p1"
-
-[node name="vehicle2" parent="world" instance=ExtResource("1_u24ay")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2.08165e-12, 1)
-texture = ExtResource("2_2jq3v")
-control_type = "npc"
-control_metadata = "p1"
-
 [node name="path_map" type="GridMap" parent="world"]
-visible = false
 mesh_library = SubResource("MeshLibrary_cxem6")
 data = {
 "cells": PackedInt32Array(65535, 1, 3, 65535, 2, 0, 0, 2, 0, 0, 1, 3, 1, 1, 4, 1, 2, 0, 2, 2, 6, 2, 1, 0, 65535, 3, 0, 0, 3, 0, 1, 3, 0, 2, 3, 6, 65534, 1, 4, 65534, 2, 0, 65534, 3, 0, 65533, 1, 4, 65533, 2, 4, 65533, 3, 0, 65533, 4, 6, 65534, 4, 6, 65535, 4, 6, 0, 4, 6, 1, 4, 6, 2, 4, 2, 2, 0, 6, 3, 0, 2, 4, 0, 2, 5, 0, 2, 5, 1, 2, 5, 2, 2, 5, 3, 2, 5, 4, 2, 4, 4, 2, 3, 4, 2, 3, 3, 6, 3, 2, 6, 3, 1, 2, 4, 1, 2, 4, 2, 2, 4, 3, 2, 5, 65535, 5, 5, 65534, 5, 5, 65533, 1, 5, 65532, 7, 4, 65532, 7, 3, 65532, 7, 2, 65532, 7, 2, 65533, 1, 2, 65534, 1, 2, 65535, 2, 3, 65535, 5, 4, 65535, 5, 4, 65534, 5, 4, 65533, 1, 3, 65533, 1, 3, 65534, 1, 1, 65535, 5, 1, 65534, 1, 0, 65534, 7, 0, 65533, 7, 0, 65535, 1, 1, 65533, 1, 1, 65532, 7, 0, 65532, 3, 0, 0, 7, 65535, 0, 3, 65534, 0, 3, 65533, 0, 3, 65533, 65535, 3, 65533, 65534, 3, 65533, 65533, 3, 65533, 65532, 3, 65534, 65532, 3, 65535, 65532, 3, 65535, 65533, 7, 65535, 65534, 7, 65535, 65535, 3, 65534, 65535, 3, 65534, 65534, 3, 65534, 65533, 3, 6, 65535, 1, 6, 65534, 1, 6, 65533, 1, 6, 65532, 7, 6, 0, 5, 6, 1, 5, 6, 2, 5, 6, 3, 5, 6, 4, 5, 65532, 4, 6, 65532, 3, 0, 65532, 2, 0, 65532, 1, 0, 65532, 65532, 4, 65532, 65533, 4, 65532, 65534, 4, 65532, 65535, 4, 65532, 0, 4)
 }
+script = ExtResource("3_7pyt8")
 
 [node name="walls" type="Node3D" parent="world"]
 
@@ -759,6 +745,14 @@ metadata/_edit_group_ = true
 [node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall47"]
 shape = SubResource("BoxShape3D_dgob6")
 
+[node name="start_spots" type="Node3D" parent="world"]
+
+[node name="spot1" type="Node3D" parent="world/start_spots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.08165e-12, 1)
+
+[node name="spot2" type="Node3D" parent="world/start_spots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2.08165e-12, 1)
+
 [node name="background" type="ColorRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
@@ -767,15 +761,13 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="world_viewport_container_splitscreen" parent="." node_paths=PackedStringArray("camera_parent") instance=ExtResource("6_sbco4")]
-texture = ExtResource("7_q3440")
-camera_screen_offset = Vector2(0.25, 2.08165e-12)
-camera_parent = NodePath("../world/vehicle")
-
-[node name="world_viewport_container_splitscreen2" parent="." node_paths=PackedStringArray("camera_parent") instance=ExtResource("6_sbco4")]
-texture = ExtResource("8_s5j4q")
-camera_screen_offset = Vector2(-0.25, 2.08165e-12)
-camera_parent = NodePath("../world/vehicle2")
+[node name="player_viewports" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ui" type="Control" parent="."]
 layout_mode = 3
@@ -793,7 +785,7 @@ offset_bottom = 102.0
 theme_override_font_sizes/font_size = 16
 text = "LAP: "
 script = ExtResource("8_d8cbk")
-vehicle = NodePath("../../world/vehicle")
+vehicle = NodePath("")
 
 [node name="position_label" type="Label" parent="ui" node_paths=PackedStringArray("vehicle")]
 layout_mode = 0
@@ -803,7 +795,7 @@ offset_bottom = 118.0
 theme_override_font_sizes/font_size = 16
 text = "pos: "
 script = ExtResource("9_6p8v7")
-vehicle = NodePath("../../world/vehicle")
+vehicle = NodePath("")
 
 [node name="verdict_label" type="Label" parent="ui" node_paths=PackedStringArray("vehicle")]
 layout_mode = 1
@@ -816,7 +808,7 @@ theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("10_q7ujv")
-vehicle = NodePath("../../world/vehicle")
+vehicle = NodePath("")
 
 [node name="countdown" type="TextureProgressBar" parent="ui"]
 texture_filter = 1
