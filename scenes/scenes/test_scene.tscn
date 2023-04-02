@@ -110,7 +110,7 @@ texture_filter = 0
 [sub_resource type="BoxShape3D" id="BoxShape3D_dgob6"]
 size = Vector3(2, 2, 2)
 
-[node name="test_scene" type="Node3D"]
+[node name="track" type="Node3D"]
 
 [node name="world" type="Node3D" parent="."]
 

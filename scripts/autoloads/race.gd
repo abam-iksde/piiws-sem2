@@ -26,7 +26,7 @@ func spawn_players():
   for player in RaceSettings.get_setting('players'):
     var player_node = preload('res://scenes/prefabs/game/vehicle.tscn').instantiate()
     player_node.texture = player.texture
-    var scene_root = get_node('/root/test_scene')
+    var scene_root = get_node('/root/track')
     player_node.control_type = player.input[0]
     player_node.control_metadata = player.input[1]
     scene_root.get_node('world').add_child(player_node)
