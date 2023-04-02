@@ -1,14 +1,15 @@
-[gd_scene load_steps=28 format=3 uid="uid://dkv3ajkk1i5ff"]
+[gd_scene load_steps=29 format=3 uid="uid://dkv3ajkk1i5ff"]
 
-[ext_resource type="Script" path="res://scripts/visuals/world_viewport_container.gd" id="1_d8u7o"]
 [ext_resource type="PackedScene" uid="uid://cxmeqa2nybtf5" path="res://scenes/prefabs/game/vehicle.tscn" id="1_u24ay"]
 [ext_resource type="Texture2D" uid="uid://cc8mw4oil318l" path="res://textures/vehicles/car_blue.png" id="2_2jq3v"]
 [ext_resource type="Script" path="res://scripts/game/checkpoints_setter.gd" id="2_goyw0"]
 [ext_resource type="Texture2D" uid="uid://bgy8mlrvddxqb" path="res://textures/wall.png" id="2_r52x6"]
 [ext_resource type="Script" path="res://scripts/game/checkpoint.gd" id="3_6dk8c"]
-[ext_resource type="Script" path="res://scripts/visuals/floor_position_in_parent.gd" id="5_h67fg"]
+[ext_resource type="PackedScene" uid="uid://c82h6qmuasmhk" path="res://scenes/prefabs/visuals/world_viewport_container_splitscreen.tscn" id="6_sbco4"]
+[ext_resource type="Texture2D" uid="uid://bh1lkov04g0xp" path="res://textures/splitscreen/player1.png" id="7_q3440"]
 [ext_resource type="Script" path="res://scripts/ui/ui.gd" id="8_bjifc"]
 [ext_resource type="Script" path="res://scripts/ui/lap_label.gd" id="8_d8cbk"]
+[ext_resource type="Texture2D" uid="uid://bdfu4jp47bltb" path="res://textures/splitscreen/player2.png" id="8_s5j4q"]
 [ext_resource type="Script" path="res://scripts/ui/position_label.gd" id="9_6p8v7"]
 [ext_resource type="Script" path="res://scripts/ui/verdict_label.gd" id="10_q7ujv"]
 [ext_resource type="Texture2D" uid="uid://cv14eivv6xt08" path="res://textures/countdown/countdown_back.png" id="12_bjjjx"]
@@ -115,668 +116,666 @@ size = Vector3(2, 2, 2)
 
 [node name="test_scene" type="Node3D"]
 
-[node name="world_viewport_container" type="SubViewportContainer" parent="."]
-texture_filter = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch = true
-script = ExtResource("1_d8u7o")
+[node name="world" type="Node3D" parent="."]
 
-[node name="world_viewport" type="SubViewport" parent="world_viewport_container"]
-handle_input_locally = false
-size = Vector2i(1600, 900)
-render_target_update_mode = 4
-
-[node name="checkpoints" type="Node3D" parent="world_viewport_container/world_viewport"]
+[node name="checkpoints" type="Node3D" parent="world"]
 script = ExtResource("2_goyw0")
 
-[node name="cp1" type="Area3D" parent="world_viewport_container/world_viewport/checkpoints"]
+[node name="cp1" type="Area3D" parent="world/checkpoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2.08165e-12, 1)
 collision_layer = 2147483648
 script = ExtResource("3_6dk8c")
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/checkpoints/cp1"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/checkpoints/cp1"]
 shape = SubResource("BoxShape3D_csmlp")
 
-[node name="cp2" type="Area3D" parent="world_viewport_container/world_viewport/checkpoints"]
+[node name="cp2" type="Area3D" parent="world/checkpoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2.08165e-12, 7)
 collision_layer = 2147483648
 script = ExtResource("3_6dk8c")
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/checkpoints/cp2"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/checkpoints/cp2"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 shape = SubResource("BoxShape3D_csmlp")
 
-[node name="cp3" type="Area3D" parent="world_viewport_container/world_viewport/checkpoints"]
+[node name="cp3" type="Area3D" parent="world/checkpoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2.08165e-12, 1)
 collision_layer = 2147483648
 script = ExtResource("3_6dk8c")
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/checkpoints/cp3"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/checkpoints/cp3"]
 shape = SubResource("BoxShape3D_csmlp")
 
-[node name="cp4" type="Area3D" parent="world_viewport_container/world_viewport/checkpoints"]
+[node name="cp4" type="Area3D" parent="world/checkpoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2.08165e-12, -5)
 collision_layer = 2147483648
 script = ExtResource("3_6dk8c")
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/checkpoints/cp4"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/checkpoints/cp4"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 shape = SubResource("BoxShape3D_csmlp")
 
-[node name="vehicle" parent="world_viewport_container/world_viewport" instance=ExtResource("1_u24ay")]
+[node name="vehicle" parent="world" instance=ExtResource("1_u24ay")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.08165e-12, 1)
 control_metadata = "p1"
 
-[node name="camera" type="Camera3D" parent="world_viewport_container/world_viewport/vehicle"]
-transform = Transform3D(1, -6.97574e-16, -1.52459e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 2.08165e-12, 10, 2.08165e-12)
-projection = 1
-current = true
-size = 20.0
-script = ExtResource("5_h67fg")
-
-[node name="vehicle2" parent="world_viewport_container/world_viewport" instance=ExtResource("1_u24ay")]
+[node name="vehicle2" parent="world" instance=ExtResource("1_u24ay")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2.08165e-12, 1)
 texture = ExtResource("2_2jq3v")
 control_type = "npc"
 control_metadata = "p1"
 
-[node name="path_map" type="GridMap" parent="world_viewport_container/world_viewport"]
+[node name="path_map" type="GridMap" parent="world"]
 visible = false
 mesh_library = SubResource("MeshLibrary_cxem6")
 data = {
 "cells": PackedInt32Array(65535, 1, 3, 65535, 2, 0, 0, 2, 0, 0, 1, 3, 1, 1, 4, 1, 2, 0, 2, 2, 6, 2, 1, 0, 65535, 3, 0, 0, 3, 0, 1, 3, 0, 2, 3, 6, 65534, 1, 4, 65534, 2, 0, 65534, 3, 0, 65533, 1, 4, 65533, 2, 4, 65533, 3, 0, 65533, 4, 6, 65534, 4, 6, 65535, 4, 6, 0, 4, 6, 1, 4, 6, 2, 4, 2, 2, 0, 6, 3, 0, 2, 4, 0, 2, 5, 0, 2, 5, 1, 2, 5, 2, 2, 5, 3, 2, 5, 4, 2, 4, 4, 2, 3, 4, 2, 3, 3, 6, 3, 2, 6, 3, 1, 2, 4, 1, 2, 4, 2, 2, 4, 3, 2, 5, 65535, 5, 5, 65534, 5, 5, 65533, 1, 5, 65532, 7, 4, 65532, 7, 3, 65532, 7, 2, 65532, 7, 2, 65533, 1, 2, 65534, 1, 2, 65535, 2, 3, 65535, 5, 4, 65535, 5, 4, 65534, 5, 4, 65533, 1, 3, 65533, 1, 3, 65534, 1, 1, 65535, 5, 1, 65534, 1, 0, 65534, 7, 0, 65533, 7, 0, 65535, 1, 1, 65533, 1, 1, 65532, 7, 0, 65532, 3, 0, 0, 7, 65535, 0, 3, 65534, 0, 3, 65533, 0, 3, 65533, 65535, 3, 65533, 65534, 3, 65533, 65533, 3, 65533, 65532, 3, 65534, 65532, 3, 65535, 65532, 3, 65535, 65533, 7, 65535, 65534, 7, 65535, 65535, 3, 65534, 65535, 3, 65534, 65534, 3, 65534, 65533, 3, 6, 65535, 1, 6, 65534, 1, 6, 65533, 1, 6, 65532, 7, 6, 0, 5, 6, 1, 5, 6, 2, 5, 6, 3, 5, 6, 4, 5, 65532, 4, 6, 65532, 3, 0, 65532, 2, 0, 65532, 1, 0, 65532, 65532, 4, 65532, 65533, 4, 65532, 65534, 4, 65532, 65535, 4, 65532, 0, 4)
 }
 
-[node name="walls" type="Node3D" parent="world_viewport_container/world_viewport"]
+[node name="walls" type="Node3D" parent="world"]
 
-[node name="wall" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2.08165e-12, 1)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall2" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall2" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2.08165e-12, -5)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall2"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall2"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall2"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall3" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall3" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2.08165e-12, -7)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall3"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall3"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall3"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall4" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall4" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2.08165e-12, -9)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall4"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall4"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall4"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall7" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall7" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2.08165e-12, 3)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall7"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall7"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall7"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall7"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall8" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall8" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2.08165e-12, 1)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall8"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall8"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall8"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall8"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall9" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall9" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2.08165e-12, -1)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall9"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall9"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall9"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall9"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall10" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall10" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2.08165e-12, -3)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall10"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall10"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall10"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall12" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall12" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2.08165e-12, 11)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall12"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall12"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall12"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall13" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall13" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2.08165e-12, 9)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall13"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall13"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall13"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall13"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall14" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall14" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2.08165e-12, 7)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall14"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall14"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall14"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall14"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall15" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall15" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2.08165e-12, 5)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall15"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall15"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall15"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall20" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall20" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2.08165e-12, 11)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall20"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall20"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall20"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall20"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall6" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall6" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2.08165e-12, -5)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall6"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall6"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall6"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall11" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall11" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2.08165e-12, -7)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall11"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall11"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall11"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall16" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall16" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2.08165e-12, -9)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall16"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall16"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall16"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall16"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall18" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall18" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2.08165e-12, 3)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall18"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall18"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall18"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall19" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall19" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2.08165e-12, 1)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall19"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall19"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall19"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall19"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall21" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall21" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2.08165e-12, -1)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall21"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall21"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall21"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall22" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall22" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2.08165e-12, -3)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall22"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall22"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall22"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall22"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall23" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall23" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2.08165e-12, 11)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall23"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall23"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall23"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall23"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall24" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall24" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2.08165e-12, 9)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall24"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall24"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall24"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall24"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall25" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall25" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2.08165e-12, 7)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall25"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall25"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall25"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall25"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall26" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall26" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2.08165e-12, 5)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall26"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall26"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall26"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall26"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall27" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall27" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 2.08165e-12, 11)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall27"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall27"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall27"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall27"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall28" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall28" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 2.08165e-12, 11)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall28"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall28"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall28"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall28"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall29" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall29" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2.08165e-12, 11)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall29"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall29"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall29"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall29"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall30" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall30" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.08165e-12, 11)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall30"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall30"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall30"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall30"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall31" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall31" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 2.08165e-12, 11)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall31"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall31"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall31"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall31"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall32" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall32" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2.08165e-12, 11)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall32"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall32"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall32"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall32"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall33" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall33" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.08165e-12, 11)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall33"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall33"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall33"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall33"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall34" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall34" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.08165e-12, 11)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall34"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall34"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall34"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall34"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall35" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall35" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2.08165e-12, 11)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall35"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall35"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall35"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall35"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall36" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall36" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2.08165e-12, 11)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall36"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall36"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall36"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall36"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall37" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall37" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2.08165e-12, -9)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall37"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall37"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall37"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall37"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall38" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall38" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 2.08165e-12, -9)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall38"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall38"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall38"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall38"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall39" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall39" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 2.08165e-12, -9)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall39"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall39"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall39"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall39"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall40" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall40" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2.08165e-12, -9)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall40"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall40"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall40"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall40"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall41" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall41" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.08165e-12, -9)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall41"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall41"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall41"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall41"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall42" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall42" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 2.08165e-12, -9)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall42"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall42"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall42"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall42"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall43" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall43" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2.08165e-12, -9)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall43"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall43"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall43"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall43"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall44" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall44" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.08165e-12, -9)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall44"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall44"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall44"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall44"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall45" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall45" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.08165e-12, -9)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall45"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall45"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall45"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall45"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall46" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall46" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2.08165e-12, -9)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall46"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall46"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall46"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall46"]
 shape = SubResource("BoxShape3D_dgob6")
 
-[node name="wall47" type="StaticBody3D" parent="world_viewport_container/world_viewport/walls"]
+[node name="wall47" type="StaticBody3D" parent="world/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2.08165e-12, -9)
 metadata/_edit_group_ = true
 
-[node name="mesh_instance" type="MeshInstance3D" parent="world_viewport_container/world_viewport/walls/wall47"]
+[node name="mesh_instance" type="MeshInstance3D" parent="world/walls/wall47"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_pvmoo")
 surface_material_override/0 = SubResource("StandardMaterial3D_o22u4")
 metadata/_edit_group_ = true
 
-[node name="collision_shape" type="CollisionShape3D" parent="world_viewport_container/world_viewport/walls/wall47"]
+[node name="collision_shape" type="CollisionShape3D" parent="world/walls/wall47"]
 shape = SubResource("BoxShape3D_dgob6")
+
+[node name="background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="world_viewport_container_splitscreen" parent="." node_paths=PackedStringArray("camera_parent") instance=ExtResource("6_sbco4")]
+texture = ExtResource("7_q3440")
+camera_screen_offset = Vector2(0.25, 2.08165e-12)
+camera_parent = NodePath("../world/vehicle")
+
+[node name="world_viewport_container_splitscreen2" parent="." node_paths=PackedStringArray("camera_parent") instance=ExtResource("6_sbco4")]
+texture = ExtResource("8_s5j4q")
+camera_screen_offset = Vector2(-0.25, 2.08165e-12)
+camera_parent = NodePath("../world/vehicle2")
 
 [node name="ui" type="Control" parent="."]
 layout_mode = 3
@@ -794,7 +793,7 @@ offset_bottom = 102.0
 theme_override_font_sizes/font_size = 16
 text = "LAP: "
 script = ExtResource("8_d8cbk")
-vehicle = NodePath("../../world_viewport_container/world_viewport/vehicle")
+vehicle = NodePath("../../world/vehicle")
 
 [node name="position_label" type="Label" parent="ui" node_paths=PackedStringArray("vehicle")]
 layout_mode = 0
@@ -804,7 +803,7 @@ offset_bottom = 118.0
 theme_override_font_sizes/font_size = 16
 text = "pos: "
 script = ExtResource("9_6p8v7")
-vehicle = NodePath("../../world_viewport_container/world_viewport/vehicle")
+vehicle = NodePath("../../world/vehicle")
 
 [node name="verdict_label" type="Label" parent="ui" node_paths=PackedStringArray("vehicle")]
 layout_mode = 1
@@ -817,7 +816,7 @@ theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("10_q7ujv")
-vehicle = NodePath("../../world_viewport_container/world_viewport/vehicle")
+vehicle = NodePath("../../world/vehicle")
 
 [node name="countdown" type="TextureProgressBar" parent="ui"]
 texture_filter = 1
