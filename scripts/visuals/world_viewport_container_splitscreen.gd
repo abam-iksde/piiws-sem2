@@ -6,7 +6,10 @@ extends Sprite2D
 func on_resize():
   var viewport_size = get_viewport().size
   global_position = viewport_size / 2.0
-  $viewport.size = Vector2(320.0 / viewport_size.y * viewport_size.x, 320.0)
+  if GameSettings.pixelated_look:
+    $viewport.size = Vector2(320.0 / viewport_size.y * viewport_size.x, 320.0)
+  else:
+    $viewport.size = viewport_size
   scale = Vector2(viewport_size.x, viewport_size.y) / Vector2(texture.get_size().x, texture.get_size().y)
 
 func _ready():
