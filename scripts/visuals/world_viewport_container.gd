@@ -2,7 +2,7 @@ extends SubViewportContainer
 
 func on_screen_resize():
   var screen_size = get_viewport().size
-  var camera_size = $world_viewport.get_camera_3d().size
+  var camera_size = $viewport.get_camera_3d().size
   stretch_shrink = screen_size.y/(camera_size*16)
 
 func _ready():

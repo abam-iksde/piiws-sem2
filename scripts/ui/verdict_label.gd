@@ -5,7 +5,7 @@ extends Label
 var done = false
 
 func _physics_process(delta):
-  if done or not vehicle.race_done:
+  if done or vehicle == null or not vehicle.race_done:
     return
   done = true
   if Race.get_player_position(vehicle) == 1:

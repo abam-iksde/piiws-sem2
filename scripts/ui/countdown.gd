@@ -1,6 +1,8 @@
 extends TextureProgressBar
 
 func _physics_process(delta):
+  if not Race.initialized:
+    return
   if Race.countdown <= 0:
     queue_free()
     return

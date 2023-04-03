@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=3 uid="uid://chnrt6rgmqwnw"]
+
+[sub_resource type="GDScript" id="GDScript_whrbl"]
+script/source = "extends Control
+
+func start_singleplayer():
+  RaceSettings.race_settings = {}
+  get_tree().change_scene_to_file('res://scenes/scenes/test_scene.tscn')
+
+func start_multiplayer():
+  RaceSettings.race_settings = {
+    'players': [
+      {
+        texture = preload('res://textures/vehicles/car_red.png'),
+        viewport = ['splitscreen', preload('res://textures/splitscreen/player1.png'), Vector2(0.25, 0.0)],
+        input = ['human', 'p1'],
+        start_spot = 0,
+        is_main = true,
+      },
+      {
+        texture = preload('res://textures/vehicles/car_blue.png'),
+        viewport = ['splitscreen', preload('res://textures/splitscreen/player2.png'), Vector2(-0.25, 0.0)],
+        input = ['human', 'p2'],
+        start_spot = 1,
+        is_main = false,
+      },
+    ],
+  }
+  get_tree().change_scene_to_file('res://scenes/scenes/test_scene.tscn')
+
+func _physics_process(delta):
+  if Input.is_key_pressed(KEY_1):
+    start_singleplayer()
+  elif Input.is_key_pressed(KEY_2):
+    start_multiplayer()
+"
+
+[node name="menu_lol" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_whrbl")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "'1' -> play singleplayer
+'2' -> play multiplayer"
