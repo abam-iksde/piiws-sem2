@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cxmeqa2nybtf5"]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/game/vehicle.gd" id="1_ae525"]
 [ext_resource type="Texture2D" uid="uid://dyglbdxn8l8lo" path="res://textures/vehicles/car_red.png" id="2_ea7sl"]
 [ext_resource type="Script" path="res://scripts/visuals/floor_position_in_parent.gd" id="3_gtna7"]
+[ext_resource type="PackedScene" uid="uid://cqg0xcvuht5ra" path="res://scenes/prefabs/visuals/smoke.tscn" id="4_cbjig"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_m2byr"]
 radius = 0.56
@@ -26,16 +27,19 @@ unique_name_in_owner = true
 [node name="1" type="Node3D" parent="sprite/tyres"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.438163, 0, -0.812153)
 
+[node name="smoke" parent="sprite/tyres/1" instance=ExtResource("4_cbjig")]
+
 [node name="2" type="Node3D" parent="sprite/tyres"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.438, 2.08165e-12, -0.812)
+
+[node name="smoke" parent="sprite/tyres/2" instance=ExtResource("4_cbjig")]
 
 [node name="3" type="Node3D" parent="sprite/tyres"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.438163, 0, 0.7)
 
+[node name="smoke" parent="sprite/tyres/3" instance=ExtResource("4_cbjig")]
+
 [node name="4" type="Node3D" parent="sprite/tyres"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.438, 2.08165e-12, 0.7)
 
-[node name="smoke_timer" type="Timer" parent="."]
-process_callback = 0
-wait_time = 0.05
-autostart = true
+[node name="smoke" parent="sprite/tyres/4" instance=ExtResource("4_cbjig")]
