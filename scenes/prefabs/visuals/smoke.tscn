@@ -1,27 +1,56 @@
-[gd_scene load_steps=4 format=3 uid="uid://ckwpmq2suhauf"]
+[gd_scene load_steps=10 format=3 uid="uid://c6lg3lirsfvyd"]
 
-[ext_resource type="Texture2D" uid="uid://b0skk6i3tdwyi" path="res://textures/smoke/smoke_background.png" id="1_cndwb"]
-[ext_resource type="Script" path="res://scripts/visuals/smoke.gd" id="2_xqwtr"]
-[ext_resource type="Texture2D" uid="uid://c24jt2j1n3l7s" path="res://textures/smoke/smoke_foreground.png" id="3_mrree"]
+[ext_resource type="Texture2D" uid="uid://dkxag6igs8tk" path="res://textures/smoke/smoke_background2.png" id="1_cg84q"]
+[ext_resource type="Script" path="res://scripts/visuals/smoke.gd" id="1_ihvq6"]
+[ext_resource type="Texture2D" uid="uid://jejoaxkeb8l" path="res://textures/smoke/smoke_foreground2.png" id="2_f72vd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xjpv2"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+shading_mode = 0
+albedo_texture = ExtResource("1_cg84q")
+texture_filter = 0
+
+[sub_resource type="Curve" id="Curve_5oava"]
+_data = [Vector2(0, 0.345455), 0.0, 0.0, 0, 0, Vector2(0.298701, 0.8), 0.0, 0.0, 0, 0, Vector2(0.831169, 0.963636), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_brhj5"]
+curve = SubResource("Curve_5oava")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bjtir"]
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 0, 0)
+angular_velocity_min = 0.3
+angular_velocity_max = 0.3
+scale_curve = SubResource("CurveTexture_brhj5")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_obliq"]
+size = Vector2(0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qipdd"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+shading_mode = 0
+albedo_texture = ExtResource("2_f72vd")
+texture_filter = 0
 
 [node name="smoke" type="Node3D"]
+script = ExtResource("1_ihvq6")
 
-[node name="sprite_background" type="Sprite3D" parent="."]
-transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, -0.1, 2.08165e-12)
-pixel_size = 0.0625
-axis = 1
-texture_filter = 0
-texture = ExtResource("1_cndwb")
-hframes = 2
-vframes = 2
-script = ExtResource("2_xqwtr")
+[node name="background" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+material_override = SubResource("StandardMaterial3D_xjpv2")
+amount = 256
+fixed_fps = 120
+process_material = SubResource("ParticleProcessMaterial_bjtir")
+draw_pass_1 = SubResource("PlaneMesh_obliq")
 
-[node name="sprite_foreground" type="Sprite3D" parent="."]
-transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, -0.08, 2.08165e-12)
-pixel_size = 0.0625
-axis = 1
-texture_filter = 0
-texture = ExtResource("3_mrree")
-hframes = 2
-vframes = 2
-script = ExtResource("2_xqwtr")
+[node name="foreground" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08, 0)
+material_override = SubResource("StandardMaterial3D_qipdd")
+amount = 128
+process_material = SubResource("ParticleProcessMaterial_bjtir")
+draw_pass_1 = SubResource("PlaneMesh_obliq")

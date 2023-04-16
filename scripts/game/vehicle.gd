@@ -141,12 +141,8 @@ func set_velocity_after_vehicle_hit(me, them):
   me.slide_steering_multiplier = 1
 
 func process_smoke():
-  if movement_mode != MovementMode.SLIDING:
-    return
   for child in %tyres.get_children():
-    var instance = load(Prefabs.smoke).instantiate()
-    get_node('..').add_child(instance)
-    instance.global_position = child.global_position
+    child.get_node('smoke').emitting = movement_mode == MovementMode.SLIDING
 
 func _ready():
   process_smoke.call_deferred()
@@ -155,7 +151,6 @@ func _ready():
   if texture != null:
     $sprite.texture = texture
   
-  $smoke_timer.connect('timeout', process_smoke)
   collect_checkpoint(false)
   
   Race.players.append(self)
@@ -176,3 +171,4 @@ func _physics_process(delta):
   
   velocity_last_frame = velocity
   move_and_slide()
+  process_smoke()
