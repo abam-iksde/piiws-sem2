@@ -1,0 +1,102 @@
+[gd_resource type="MeshLibrary" load_steps=15 format=3 uid="uid://d1obec0pyiq8p"]
+
+[ext_resource type="Shader" path="res://shaders/tile.gdshader" id="1_o8jxi"]
+[ext_resource type="Texture2D" uid="uid://g0we4gqef6a1" path="res://textures/test_track/tileset.png" id="2_kj8cw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y450g"]
+render_priority = 0
+shader = ExtResource("1_o8jxi")
+shader_parameter/tile_offset = Vector2i(0, 0)
+shader_parameter/tile_size = Vector2i(32, 32)
+shader_parameter/tileset_texture = ExtResource("2_kj8cw")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1e34f"]
+material = SubResource("ShaderMaterial_y450g")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j6lo4"]
+render_priority = 0
+shader = ExtResource("1_o8jxi")
+shader_parameter/tile_offset = Vector2i(32, 0)
+shader_parameter/tile_size = Vector2i(32, 32)
+shader_parameter/tileset_texture = ExtResource("2_kj8cw")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vp2ai"]
+material = SubResource("ShaderMaterial_j6lo4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mxrbn"]
+render_priority = 0
+shader = ExtResource("1_o8jxi")
+shader_parameter/tile_offset = Vector2i(64, 0)
+shader_parameter/tile_size = Vector2i(32, 32)
+shader_parameter/tileset_texture = ExtResource("2_kj8cw")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_77py7"]
+material = SubResource("ShaderMaterial_mxrbn")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6yho8"]
+render_priority = 0
+shader = ExtResource("1_o8jxi")
+shader_parameter/tile_offset = Vector2i(0, 32)
+shader_parameter/tile_size = Vector2i(32, 32)
+shader_parameter/tileset_texture = ExtResource("2_kj8cw")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_t2cew"]
+material = SubResource("ShaderMaterial_6yho8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_veto1"]
+render_priority = 0
+shader = ExtResource("1_o8jxi")
+shader_parameter/tile_offset = Vector2i(32, 32)
+shader_parameter/tile_size = Vector2i(32, 32)
+shader_parameter/tileset_texture = ExtResource("2_kj8cw")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_f0ftc"]
+material = SubResource("ShaderMaterial_veto1")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7lchg"]
+render_priority = 0
+shader = ExtResource("1_o8jxi")
+shader_parameter/tile_offset = Vector2i(64, 32)
+shader_parameter/tile_size = Vector2i(32, 32)
+shader_parameter/tileset_texture = ExtResource("2_kj8cw")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nw8dd"]
+material = SubResource("ShaderMaterial_7lchg")
+
+[resource]
+item/0/name = "tile0"
+item/0/mesh = SubResource("PlaneMesh_1e34f")
+item/0/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/0/shapes = []
+item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/0/navigation_layers = 1
+item/1/name = "tile1"
+item/1/mesh = SubResource("PlaneMesh_vp2ai")
+item/1/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/1/shapes = []
+item/1/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/1/navigation_layers = 1
+item/2/name = "tile2"
+item/2/mesh = SubResource("PlaneMesh_77py7")
+item/2/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/2/shapes = []
+item/2/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/2/navigation_layers = 1
+item/3/name = "tile3"
+item/3/mesh = SubResource("PlaneMesh_t2cew")
+item/3/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/3/shapes = []
+item/3/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/3/navigation_layers = 1
+item/4/name = "tile4"
+item/4/mesh = SubResource("PlaneMesh_f0ftc")
+item/4/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/4/shapes = []
+item/4/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/4/navigation_layers = 1
+item/5/name = "tile5"
+item/5/mesh = SubResource("PlaneMesh_nw8dd")
+item/5/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/5/shapes = []
+item/5/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/5/navigation_layers = 1

@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://b44jvqx5coj8j"]
+
+[ext_resource type="Shader" path="res://shaders/tile.gdshader" id="1_7hiwu"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tif7u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yt53a"]
+render_priority = 0
+shader = ExtResource("1_7hiwu")
+shader_parameter/tile_offset = null
+shader_parameter/tile_size = null
+
+[node name="tile" type="MeshInstance3D"]
+mesh = SubResource("PlaneMesh_tif7u")
+surface_material_override/0 = SubResource("ShaderMaterial_yt53a")

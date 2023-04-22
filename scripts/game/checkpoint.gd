@@ -1,3 +1,4 @@
+class_name Checkpoint
 extends Area3D
 
 func on_body_enter(body):

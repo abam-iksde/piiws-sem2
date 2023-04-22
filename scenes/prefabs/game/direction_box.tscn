@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvijr2mkgp5ha"]
+
+[ext_resource type="Script" path="res://scripts/game/direction_box.gd" id="1_kjhue"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3bxia"]
+size = Vector3(2, 2, 2)
+
+[node name="direction_box" type="Area3D"]
+script = ExtResource("1_kjhue")
+
+[node name="collision_shape" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_3bxia")
