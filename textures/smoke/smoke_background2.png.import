@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dkxag6igs8tk"
-path.s3tc="res://.godot/imported/smoke_background2.png-d17783a08a4b34e946378faab3fbb4cf.s3tc.ctex"
+path="res://.godot/imported/smoke_background2.png-d17783a08a4b34e946378faab3fbb4cf.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://textures/smoke/smoke_background2.png"
-dest_files=["res://.godot/imported/smoke_background2.png-d17783a08a4b34e946378faab3fbb4cf.s3tc.ctex"]
+dest_files=["res://.godot/imported/smoke_background2.png-d17783a08a4b34e946378faab3fbb4cf.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
