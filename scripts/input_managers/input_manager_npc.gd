@@ -5,16 +5,20 @@ const HANDBRAKE_THRESHOLD = 10
 
 var metadata
 var node
-var path_map
+
+var overlapping_boxes = {}
 
 func angle_to_angle(from, to):
   return fposmod(to-from + PI, PI*2) - PI
 
 func get_target_direction():
-  var local_position = node.global_position - path_map.global_position
-  var grid_position = path_map.local_to_map(local_position)
-  var item = path_map.get_cell_item(grid_position)
-  return Angles.get_angle_from_index(item)
+  for box in overlapping_boxes:
+    if (node.global_position.x >= box.global_position.x-1.0
+    and node.global_position.x <= box.global_position.x+1.0
+    and node.global_position.z >= box.global_position.z-1.0
+    and node.global_position.z <= box.global_position.z+1.0):
+      return box.direction
+  return 0
 
 func get_input():
   var steering = 0
@@ -37,4 +41,3 @@ func get_input():
 func _init(_metadata, _node):
   metadata = _metadata
   node = _node
-  path_map = node.get_node('../path_map')

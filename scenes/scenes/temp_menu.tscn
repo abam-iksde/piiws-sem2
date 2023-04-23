@@ -5,7 +5,7 @@ script/source = "extends Control
 
 func start_singleplayer():
   RaceSettings.race_settings = {}
-  get_tree().change_scene_to_file('res://scenes/scenes/test_scene.tscn')
+  get_tree().change_scene_to_file('res://scenes/scenes/race.tscn')
 
 func start_multiplayer():
   RaceSettings.race_settings = {
@@ -26,7 +26,7 @@ func start_multiplayer():
       },
     ],
   }
-  get_tree().change_scene_to_file('res://scenes/scenes/test_scene.tscn')
+  get_tree().change_scene_to_file('res://scenes/scenes/race.tscn')
 
 func _physics_process(delta):
   if Input.is_key_pressed(KEY_1):
