@@ -24,6 +24,7 @@ Race="*res://scripts/autoloads/race.gd"
 Prefabs="*res://scripts/autoloads/prefabs.gd"
 Sounds="*res://scenes/prefabs/autoload/sounds.tscn"
 RaceSettings="*res://scripts/autoloads/race_settings.gd"
+Tournament="*res://scripts/autoloads/tournament.gd"
 
 [display]
 

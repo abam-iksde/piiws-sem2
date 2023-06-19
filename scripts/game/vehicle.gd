@@ -35,10 +35,13 @@ enum MovementMode {
   SLIDING,
 }
 
+var id
+
 var movement_mode = MovementMode.NORMAL
 var slide_steering_multiplier = 1
 
 var input_manager
+var is_human
 
 var previous_checkpoint = null
 var next_checkpoint = null
@@ -60,8 +63,10 @@ func init_control(control_type, control_metadata):
   match control_type:
     'human':
       input_manager = InputManagerHuman.new(control_metadata, self)
+      is_human = true
     'npc':
       input_manager = InputManagerNPC.new(control_metadata, self)
+      is_human = false
 
 func mode_handler_normal(delta, input):
   if input.handbrake:

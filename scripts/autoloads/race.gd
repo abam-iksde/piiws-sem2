@@ -10,6 +10,7 @@ var n_players_finished
 var race_started
 var countdown
 var initialized = false
+var points_disbursed
 
 func init(_checkpoints):
   checkpoints = _checkpoints
@@ -20,6 +21,7 @@ func init(_checkpoints):
   race_started = false
   countdown = 5
   initialized = true
+  points_disbursed = false
   start_race()
 
 func spawn_players():
@@ -31,6 +33,7 @@ func spawn_players():
     player_node.control_metadata = player.input[1]
     scene_root.get_node('world').add_child(player_node)
     player_node.global_position = scene_root.get_node('world/start_spots').get_child(player.start_spot).global_position
+    player_node.id = player.id
     if player.viewport != null:
       var viewport
       if player.viewport[0] == 'singleplayer':
@@ -63,11 +66,15 @@ func next_checkpoint(checkpoint, lap, change=1):
   }
 
 func _physics_process(delta):
+  if Input.is_action_just_pressed('ui_accept') and is_race_finished() and not points_disbursed:
+    end_race()
+    Tournament.summarize_race()
+    points_disbursed = true
   var player_progress = []
   for player in players:
-    if not final_positions.has(player) and player.lap > laps:
+    if not final_positions.has(player.id) and player.lap > laps:
       n_players_finished += 1
-      final_positions[player] = n_players_finished
+      final_positions[player.id] = n_players_finished
       player.finish_race()
     if not player.race_done:
       player_progress.append({
@@ -78,7 +85,7 @@ func _physics_process(delta):
       })
   player_progress.sort_custom(wrapped_progress_sort)
   for index in range(len(player_progress)):
-    player_positions[player_progress[index].player] = index + 1 + n_players_finished
+    player_positions[player_progress[index].player.id] = index + 1 + n_players_finished
 
 func progress_sort(a, b):
   var laps_difference = b.lap - a.lap
@@ -97,10 +104,10 @@ func wrapped_progress_sort(a, b):
   return progress_sort(a, b) < 0
 
 func get_player_position(player):
-  if final_positions.has(player):
-    return final_positions[player]
-  if player_positions.has(player):
-    return player_positions[player]
+  if final_positions.has(player.id):
+    return final_positions[player.id]
+  if player_positions.has(player.id):
+    return player_positions[player.id]
   return 1
 
 func start_race():
@@ -116,3 +123,18 @@ func start_race():
   countdown = 1
   await get_tree().create_timer(1).timeout
   countdown = 0
+
+func end_race():
+  for player in players:
+    if not final_positions.has(player.id):
+      final_positions[player.id] = player_positions[player.id]
+  players = []
+
+func is_race_finished():
+  if len(players) == 0:
+    return false
+  for player in players:
+    if player.is_human:
+      if not final_positions.has(player.id):
+        return false
+  return true
