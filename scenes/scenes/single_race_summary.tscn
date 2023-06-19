@@ -4,7 +4,7 @@
 script/source = "extends Control
 
 func get_race_positions_tally():
-  var text = \"\"
+  var text = ''
   var players = RaceSettings.get_setting('players').duplicate()
   players.sort_custom(func(a,b): return Race.final_positions[a.id] < Race.final_positions[b.id])
   for player_index in range(len(players)):
