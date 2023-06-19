@@ -3,36 +3,57 @@
 [sub_resource type="GDScript" id="GDScript_whrbl"]
 script/source = "extends Control
 
+var single_race = [
+  'res://scenes/scenes/race.tscn',
+]
+
+var test_tournament = [
+  'res://scenes/scenes/race.tscn',
+  'res://scenes/scenes/race.tscn',
+]
+
+var two_player_settings = {
+  'players': [
+    {
+      texture = preload('res://textures/vehicles/car_red.png'),
+      viewport = ['splitscreen', preload('res://textures/splitscreen/player1.png'), Vector2(0.25, 0.0)],
+      input = ['human', 'p1'],
+      start_spot = 0,
+      is_main = true,
+      id = RaceSettings.generate_player_id(),
+    },
+    {
+      texture = preload('res://textures/vehicles/car_blue.png'),
+      viewport = ['splitscreen', preload('res://textures/splitscreen/player2.png'), Vector2(-0.25, 0.0)],
+      input = ['human', 'p2'],
+      start_spot = 1,
+      is_main = false,
+      id = RaceSettings.generate_player_id(),
+    },
+  ],
+}
+
 func start_singleplayer():
-  RaceSettings.race_settings = {}
-  get_tree().change_scene_to_file('res://scenes/scenes/race.tscn')
+  Tournament.start(single_race, {})
 
 func start_multiplayer():
-  RaceSettings.race_settings = {
-    'players': [
-      {
-        texture = preload('res://textures/vehicles/car_red.png'),
-        viewport = ['splitscreen', preload('res://textures/splitscreen/player1.png'), Vector2(0.25, 0.0)],
-        input = ['human', 'p1'],
-        start_spot = 0,
-        is_main = true,
-      },
-      {
-        texture = preload('res://textures/vehicles/car_blue.png'),
-        viewport = ['splitscreen', preload('res://textures/splitscreen/player2.png'), Vector2(-0.25, 0.0)],
-        input = ['human', 'p2'],
-        start_spot = 1,
-        is_main = false,
-      },
-    ],
-  }
-  get_tree().change_scene_to_file('res://scenes/scenes/race.tscn')
+  Tournament.start(single_race, two_player_settings)
+
+func start_singleplayer_tournament():
+  Tournament.start(test_tournament, {})
+
+func start_multiplayer_tournament():
+  Tournament.start(test_tournament, two_player_settings)
 
 func _physics_process(delta):
   if Input.is_key_pressed(KEY_1):
     start_singleplayer()
   elif Input.is_key_pressed(KEY_2):
     start_multiplayer()
+  elif Input.is_key_pressed(KEY_3):
+    start_singleplayer_tournament()
+  elif Input.is_key_pressed(KEY_4):
+    start_multiplayer_tournament()
 "
 
 [node name="menu_lol" type="Control"]
@@ -49,4 +70,7 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "'1' -> play singleplayer
-'2' -> play multiplayer"
+'2' -> play multiplayer
+'3' -> play sigleplayer tournament
+'4' -> play multiplayer tournament
+"
