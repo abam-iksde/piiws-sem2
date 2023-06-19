@@ -15,7 +15,7 @@ func _ready():
   $Label.text = get_race_positions_tally()
 
 func _physics_process(delta):
-  if Input.is_action_just_pressed(\"ui_accept\"):
+  if Input.is_action_just_pressed('ui_accept'):
     Tournament.advance()
 "
 

@@ -11,7 +11,7 @@ enum State {
 var state
 
 func get_race_positions_tally():
-  var text = \"\"
+  var text = ''
   var players = RaceSettings.get_setting('players').duplicate()
   players.sort_custom(func(a,b): return Race.final_positions[a.id] < Race.final_positions[b.id])
   for player_index in range(len(players)):
@@ -19,7 +19,7 @@ func get_race_positions_tally():
   return text
 
 func get_tournament_summary_tally():
-  var text = \"\"
+  var text = ''
   var players = RaceSettings.get_setting('players').duplicate()
   players.sort_custom(func(a,b): return Tournament.scores[a.id] > Tournament.scores[b.id])
   for player_index in range(len(players)):
@@ -31,7 +31,7 @@ func _ready():
   state = State.RACE_TALLY
 
 func _physics_process(delta):
-  if Input.is_action_just_pressed(\"ui_accept\"):
+  if Input.is_action_just_pressed('ui_accept'):
     if state == State.RACE_TALLY:
       state = State.TOURNAMENT_TALLY
       $Label.text = get_tournament_summary_tally()
