@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://55831ed4lnmq"]
 
 [ext_resource type="Script" path="res://scripts/game/vehicle.gd" id="1_ae525"]
 [ext_resource type="Texture2D" uid="uid://dyglbdxn8l8lo" path="res://textures/vehicles/car_red.png" id="2_ea7sl"]
 [ext_resource type="Script" path="res://scripts/visuals/floor_position_in_parent.gd" id="3_gtna7"]
-[ext_resource type="PackedScene" uid="uid://cqg0xcvuht5ra" path="res://scenes/prefabs/visuals/smoke.tscn" id="4_cbjig"]
+[ext_resource type="PackedScene" uid="uid://c6lg3lirsfvyd" path="res://scenes/prefabs/visuals/smoke.tscn" id="4_cbjig"]
+[ext_resource type="Script" path="res://scripts/game/boost.gd" id="5_22dmo"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_m2byr"]
 radius = 0.56
@@ -43,3 +44,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.438163, 0, 0.7)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.438, 2.08165e-12, 0.7)
 
 [node name="smoke" parent="sprite/tyres/4" instance=ExtResource("4_cbjig")]
+
+[node name="power_ups" type="Node3D" parent="."]
+
+[node name="boost" type="Node3D" parent="power_ups"]
+script = ExtResource("5_22dmo")

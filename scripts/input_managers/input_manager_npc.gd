@@ -36,6 +36,7 @@ func get_input():
     acceleration = 1,
     steering = steering,
     handbrake = handbrake,
+    power_up = false,
   }
 
 func _init(_metadata, _node):
