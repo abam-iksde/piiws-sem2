@@ -167,6 +167,8 @@ func handle_power_ups(input):
     match power_up:
       'boost':
         $power_ups/boost.activate()
+      'rocket':
+        $power_ups/rocket_spawner.activate()
     power_up = null
 
 var states_lookup = {

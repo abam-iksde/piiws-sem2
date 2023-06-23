@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6w4fr4xtkory"]
+
+[ext_resource type="Script" path="res://scripts/game/explosion.gd" id="1_fe8gl"]
+[ext_resource type="Texture2D" uid="uid://cfyrxwj8jkpjq" path="res://textures/powerups/explosion.png" id="2_ra07f"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_du6i7"]
+radius = 1.5
+
+[node name="explosion" type="Area3D"]
+script = ExtResource("1_fe8gl")
+
+[node name="sprite" type="Sprite3D" parent="."]
+pixel_size = 0.0625
+axis = 1
+texture_filter = 0
+texture = ExtResource("2_ra07f")
+hframes = 4
+
+[node name="collision_shape" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_du6i7")
