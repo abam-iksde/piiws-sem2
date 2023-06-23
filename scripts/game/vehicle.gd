@@ -35,15 +35,20 @@ enum MovementMode {
   SLIDING,
 }
 
+var id
+
 var movement_mode = MovementMode.NORMAL
 var slide_steering_multiplier = 1
 
 var input_manager
+var is_human
 
 var previous_checkpoint = null
 var next_checkpoint = null
 var lap = null
 var race_done = false
+
+var power_up = null
 
 func collect_checkpoint(previous):
   var next_checkpoint_data = Race.next_checkpoint(previous_checkpoint if previous else next_checkpoint, lap)
@@ -60,8 +65,10 @@ func init_control(control_type, control_metadata):
   match control_type:
     'human':
       input_manager = InputManagerHuman.new(control_metadata, self)
+      is_human = true
     'npc':
       input_manager = InputManagerNPC.new(control_metadata, self)
+      is_human = false
 
 func mode_handler_normal(delta, input):
   if input.handbrake:
@@ -155,6 +162,15 @@ func _ready():
   
   Race.players.append(self)
 
+func handle_power_ups(input):
+  if input.power_up:
+    match power_up:
+      'boost':
+        $power_ups/boost.activate()
+      'rocket':
+        $power_ups/rocket_spawner.activate()
+    power_up = null
+
 var states_lookup = {
   MovementMode.NORMAL: mode_handler_normal,
   MovementMode.SLIDING: mode_handler_slide,
@@ -166,6 +182,7 @@ func _physics_process(delta):
   var input = input_manager.get_input()
   
   states_lookup[movement_mode].call(delta, input)
+  handle_power_ups(input)
   check_collisions()
   check_slide_exit(input)
   
