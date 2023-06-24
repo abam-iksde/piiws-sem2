@@ -45,10 +45,14 @@ func spawn_players():
         viewport.camera_parent = player_node
         viewport.camera_screen_offset = player.viewport[2]
       scene_root.get_node('player_viewports').add_child(viewport)
-    if player.is_main:
-      scene_root.get_node('ui/lap_label').vehicle = player_node
-      scene_root.get_node('ui/position_label').vehicle = player_node
-      scene_root.get_node('ui/verdict_label').vehicle = player_node
+      spawn_ui(player.viewport[3], player.viewport[4], player_node)
+
+func spawn_ui(position, size, player):
+  var ui = get_node('/root/track/ui')
+  var player_ui = preload('res://scenes/prefabs/ui/player_ui.tscn').instantiate()
+  player_ui.player = player
+  ui.add_child(player_ui)
+  player_ui.set_bounds(position, size)
 
 func next_checkpoint(checkpoint, lap, change=1):
   var current_index = 0

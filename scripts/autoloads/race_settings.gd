@@ -4,7 +4,7 @@ const race_default_settings = {
   'players': [
     {
       texture = preload('res://textures/vehicles/car_red.png'),
-      viewport = ['singleplayer'],
+      viewport = ['singleplayer', null, null, Vector2(0.0, 0.0), Vector2(1.0, 1.0)],
       input = ['human', 'p1'],
       start_spot = 0,
       is_main = true,
