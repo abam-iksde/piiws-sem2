@@ -1,7 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://chnrt6rgmqwnw"]
+[gd_scene load_steps=13 format=3 uid="uid://chnrt6rgmqwnw"]
+
+[ext_resource type="Script" path="res://scripts/ui/ui.gd" id="1_332bi"]
+[ext_resource type="Texture2D" uid="uid://cok2lg1koy8ky" path="res://textures/menu/option_background.png" id="2_283xx"]
+[ext_resource type="Shader" path="res://shaders/selection.gdshader" id="3_4fdyq"]
+[ext_resource type="Texture2D" uid="uid://l8eowgux3adu" path="res://textures/menu/single_race.png" id="3_6l7k1"]
+[ext_resource type="Shader" path="res://shaders/shine.gdshader" id="3_wvtnb"]
+[ext_resource type="Texture2D" uid="uid://bdlfeh52mt3u8" path="res://textures/menu/option_selection.png" id="4_b44ro"]
+[ext_resource type="Texture2D" uid="uid://dpc6kup4etxel" path="res://textures/menu/tournament.png" id="4_om5kn"]
+[ext_resource type="Texture2D" uid="uid://cju2lnks5vp14" path="res://textures/menu/shine.png" id="4_v6nb8"]
 
 [sub_resource type="GDScript" id="GDScript_whrbl"]
 script/source = "extends Control
+
+enum Selection {
+  SINGLE_RACE,
+  TOURNAMENT,
+}
+
+var player_inputs = ['p1', 'p2']
+
+func any_player_just_pressed(action):
+  for player in player_inputs:
+    if Input.is_action_just_pressed(player + action):
+      return true
+  return false
+
+var selection = Selection.SINGLE_RACE
 
 var single_race = [
   'res://scenes/scenes/race.tscn',
@@ -46,15 +70,42 @@ func start_multiplayer_tournament():
   Tournament.start(test_tournament, two_player_settings)
 
 func _physics_process(delta):
-  if Input.is_key_pressed(KEY_1):
-    start_singleplayer()
-  elif Input.is_key_pressed(KEY_2):
-    start_multiplayer()
-  elif Input.is_key_pressed(KEY_3):
-    start_singleplayer_tournament()
-  elif Input.is_key_pressed(KEY_4):
-    start_multiplayer_tournament()
+  if any_player_just_pressed('_left'):
+    selection = Selection.SINGLE_RACE
+  elif any_player_just_pressed('_right'):
+    selection = Selection.TOURNAMENT
+  
+  var accepted = any_player_just_pressed('_power_up')
+  match selection:
+    Selection.SINGLE_RACE:
+      $ui/single_selection.visible = true
+      $ui/tournament_selection.visible = false
+      if accepted:
+        start_singleplayer()
+    Selection.TOURNAMENT:
+      $ui/single_selection.visible = false
+      $ui/tournament_selection.visible = true
+      if accepted:
+        start_singleplayer_tournament()
+#  if Input.is_key_pressed(KEY_1):
+#    start_singleplayer()
+#  elif Input.is_key_pressed(KEY_2):
+#    start_multiplayer()
+#  elif Input.is_key_pressed(KEY_3):
+#    start_singleplayer_tournament()
+#  elif Input.is_key_pressed(KEY_4):
+#    start_multiplayer_tournament()
 "
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_00v7d"]
+shader = ExtResource("3_4fdyq")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_it102"]
+shader = ExtResource("3_wvtnb")
+shader_parameter/shine_texture = ExtResource("4_v6nb8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4nce3"]
+shader = ExtResource("3_4fdyq")
 
 [node name="menu_lol" type="Control"]
 layout_mode = 3
@@ -66,6 +117,7 @@ grow_vertical = 2
 script = SubResource("GDScript_whrbl")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
@@ -74,3 +126,120 @@ text = "'1' -> play singleplayer
 '3' -> play sigleplayer tournament
 '4' -> play multiplayer tournament
 "
+
+[node name="background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ui" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 426.0
+offset_bottom = 320.0
+script = ExtResource("1_332bi")
+
+[node name="single_background" type="TextureRect" parent="ui"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -161.5
+offset_top = -56.5
+offset_right = -38.5
+offset_bottom = 56.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_283xx")
+
+[node name="single_selection" type="TextureRect" parent="ui"]
+visible = false
+texture_filter = 1
+material = SubResource("ShaderMaterial_00v7d")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -161.5
+offset_top = -56.5
+offset_right = -38.5
+offset_bottom = 56.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_b44ro")
+
+[node name="single_race" type="TextureRect" parent="ui"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_it102")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -161.5
+offset_top = -56.5
+offset_right = -38.5
+offset_bottom = 56.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_6l7k1")
+
+[node name="tournament_background" type="TextureRect" parent="ui"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 38.5
+offset_top = -56.5
+offset_right = 161.5
+offset_bottom = 56.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_283xx")
+
+[node name="tournament_selection" type="TextureRect" parent="ui"]
+visible = false
+texture_filter = 1
+material = SubResource("ShaderMaterial_4nce3")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 38.5
+offset_top = -56.5
+offset_right = 161.5
+offset_bottom = 56.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_b44ro")
+
+[node name="tournament" type="TextureRect" parent="ui"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_it102")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 38.5
+offset_top = -56.5
+offset_right = 161.5
+offset_bottom = 56.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_om5kn")
