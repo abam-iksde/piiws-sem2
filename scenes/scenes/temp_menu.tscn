@@ -16,7 +16,7 @@ var two_player_settings = {
   'players': [
     {
       texture = preload('res://textures/vehicles/car_red.png'),
-      viewport = ['splitscreen', preload('res://textures/splitscreen/player1.png'), Vector2(0.25, 0.0)],
+      viewport = ['splitscreen', preload('res://textures/splitscreen/player1.png'), Vector2(0.25, 0.0), Vector2(0.0, 0.0), Vector2(0.5, 1.0)],
       input = ['human', 'p1'],
       start_spot = 0,
       is_main = true,
@@ -24,7 +24,7 @@ var two_player_settings = {
     },
     {
       texture = preload('res://textures/vehicles/car_blue.png'),
-      viewport = ['splitscreen', preload('res://textures/splitscreen/player2.png'), Vector2(-0.25, 0.0)],
+      viewport = ['splitscreen', preload('res://textures/splitscreen/player2.png'), Vector2(-0.25, 0.0), Vector2(0.5, 0.0), Vector2(0.5, 1.0)],
       input = ['human', 'p2'],
       start_spot = 1,
       is_main = false,

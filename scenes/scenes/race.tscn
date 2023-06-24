@@ -1,10 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dkv3ajkk1i5ff"]
+[gd_scene load_steps=6 format=3 uid="uid://dkv3ajkk1i5ff"]
 
 [ext_resource type="Script" path="res://scripts/game/world.gd" id="1_y1kd3"]
 [ext_resource type="Script" path="res://scripts/ui/ui.gd" id="2_rxgue"]
-[ext_resource type="Script" path="res://scripts/ui/lap_label.gd" id="3_mo7r0"]
-[ext_resource type="Script" path="res://scripts/ui/position_label.gd" id="4_uet8r"]
-[ext_resource type="Script" path="res://scripts/ui/verdict_label.gd" id="5_748m7"]
 [ext_resource type="Texture2D" uid="uid://cv14eivv6xt08" path="res://textures/countdown/countdown_back.png" id="6_pglfp"]
 [ext_resource type="Texture2D" uid="uid://cy7eoyno68yg1" path="res://textures/countdown/countdown_front.png" id="7_elend"]
 [ext_resource type="Script" path="res://scripts/ui/countdown.gd" id="8_n66wk"]
@@ -48,38 +45,6 @@ offset_bottom = 320.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("2_rxgue")
-
-[node name="lap_label" type="Label" parent="ui" node_paths=PackedStringArray("vehicle")]
-layout_mode = 0
-offset_right = 170.0
-offset_bottom = 102.0
-theme_override_font_sizes/font_size = 16
-text = "LAP: "
-script = ExtResource("3_mo7r0")
-vehicle = NodePath("")
-
-[node name="position_label" type="Label" parent="ui" node_paths=PackedStringArray("vehicle")]
-layout_mode = 0
-offset_top = 16.0
-offset_right = 163.0
-offset_bottom = 118.0
-theme_override_font_sizes/font_size = 16
-text = "pos: "
-script = ExtResource("4_uet8r")
-vehicle = NodePath("")
-
-[node name="verdict_label" type="Label" parent="ui" node_paths=PackedStringArray("vehicle")]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 32
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("5_748m7")
-vehicle = NodePath("")
 
 [node name="countdown" type="TextureProgressBar" parent="ui"]
 texture_filter = 1
