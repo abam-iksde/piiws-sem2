@@ -1,13 +1,13 @@
 [gd_scene load_steps=13 format=3 uid="uid://chnrt6rgmqwnw"]
 
 [ext_resource type="Script" path="res://scripts/ui/ui.gd" id="1_332bi"]
-[ext_resource type="Texture2D" uid="uid://cok2lg1koy8ky" path="res://textures/menu/option_background.png" id="2_283xx"]
+[ext_resource type="Texture2D" uid="uid://cok2lg1koy8ky" path="res://textures/menu/option_background.png" id="2_pwcwg"]
 [ext_resource type="Shader" path="res://shaders/selection.gdshader" id="3_4fdyq"]
-[ext_resource type="Texture2D" uid="uid://l8eowgux3adu" path="res://textures/menu/single_race.png" id="3_6l7k1"]
 [ext_resource type="Shader" path="res://shaders/shine.gdshader" id="3_wvtnb"]
-[ext_resource type="Texture2D" uid="uid://bdlfeh52mt3u8" path="res://textures/menu/option_selection.png" id="4_b44ro"]
-[ext_resource type="Texture2D" uid="uid://dpc6kup4etxel" path="res://textures/menu/tournament.png" id="4_om5kn"]
+[ext_resource type="Texture2D" uid="uid://bdlfeh52mt3u8" path="res://textures/menu/option_selection.png" id="4_exaw4"]
 [ext_resource type="Texture2D" uid="uid://cju2lnks5vp14" path="res://textures/menu/shine.png" id="4_v6nb8"]
+[ext_resource type="Texture2D" uid="uid://l8eowgux3adu" path="res://textures/menu/single_race.png" id="7_5c533"]
+[ext_resource type="Texture2D" uid="uid://dpc6kup4etxel" path="res://textures/menu/tournament.png" id="8_kvim7"]
 
 [sub_resource type="GDScript" id="GDScript_whrbl"]
 script/source = "extends Control
@@ -89,7 +89,7 @@ offset_right = -38.5
 offset_bottom = 56.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_283xx")
+texture = ExtResource("2_pwcwg")
 
 [node name="single_selection" type="TextureRect" parent="ui"]
 visible = false
@@ -107,7 +107,7 @@ offset_right = -38.5
 offset_bottom = 56.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_b44ro")
+texture = ExtResource("4_exaw4")
 
 [node name="single_race" type="TextureRect" parent="ui"]
 texture_filter = 1
@@ -124,7 +124,7 @@ offset_right = -38.5
 offset_bottom = 56.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_6l7k1")
+texture = ExtResource("7_5c533")
 
 [node name="tournament_background" type="TextureRect" parent="ui"]
 texture_filter = 1
@@ -140,7 +140,7 @@ offset_right = 161.5
 offset_bottom = 56.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_283xx")
+texture = ExtResource("2_pwcwg")
 
 [node name="tournament_selection" type="TextureRect" parent="ui"]
 visible = false
@@ -158,7 +158,7 @@ offset_right = 161.5
 offset_bottom = 56.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_b44ro")
+texture = ExtResource("4_exaw4")
 
 [node name="tournament" type="TextureRect" parent="ui"]
 texture_filter = 1
@@ -175,4 +175,4 @@ offset_right = 161.5
 offset_bottom = 56.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_om5kn")
+texture = ExtResource("8_kvim7")
