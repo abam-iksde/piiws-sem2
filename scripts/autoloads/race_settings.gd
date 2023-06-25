@@ -8,7 +8,7 @@ const race_default_settings = {
       input = ['human', 'p1'],
       start_spot = 0,
       is_main = true,
-      id = -1,
+      id = 'RED',
     },
     {
       texture = preload('res://textures/vehicles/car_blue.png'),
@@ -16,7 +16,7 @@ const race_default_settings = {
       input = ['npc', ''],
       start_spot = 1,
       is_main = false,
-      id = -2,
+      id = 'BLUE',
     },
   ],
   'laps': 1,
