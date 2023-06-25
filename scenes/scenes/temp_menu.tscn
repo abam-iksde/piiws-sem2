@@ -17,76 +17,28 @@ enum Selection {
   TOURNAMENT,
 }
 
-var player_inputs = ['p1', 'p2']
-
-func any_player_just_pressed(action):
-  for player in player_inputs:
-    if Input.is_action_just_pressed(player + action):
-      return true
-  return false
-
-var selection = Selection.SINGLE_RACE
-
-var single_race = [
-  'res://scenes/scenes/race.tscn',
-]
-
-var test_tournament = [
-  'res://scenes/scenes/race.tscn',
-  'res://scenes/scenes/race.tscn',
-]
-
-var two_player_settings = {
-  'players': [
-    {
-      texture = preload('res://textures/vehicles/car_red.png'),
-      viewport = ['splitscreen', preload('res://textures/splitscreen/player1.png'), Vector2(0.25, 0.0), Vector2(0.0, 0.0), Vector2(0.5, 1.0)],
-      input = ['human', 'p1'],
-      start_spot = 0,
-      is_main = true,
-      id = RaceSettings.generate_player_id(),
-    },
-    {
-      texture = preload('res://textures/vehicles/car_blue.png'),
-      viewport = ['splitscreen', preload('res://textures/splitscreen/player2.png'), Vector2(-0.25, 0.0), Vector2(0.5, 0.0), Vector2(0.5, 1.0)],
-      input = ['human', 'p2'],
-      start_spot = 1,
-      is_main = false,
-      id = RaceSettings.generate_player_id(),
-    },
-  ],
-}
-
-func start_singleplayer():
-  Tournament.start(single_race, {})
-
-func start_multiplayer():
-  Tournament.start(single_race, two_player_settings)
-
-func start_singleplayer_tournament():
-  Tournament.start(test_tournament, {})
-
-func start_multiplayer_tournament():
-  Tournament.start(test_tournament, two_player_settings)
-
 func _physics_process(delta):
-  if any_player_just_pressed('_left'):
+  var selection = Misc.get_value('main_menu_selection', Selection.SINGLE_RACE)
+  if AnyPlayer.just_pressed('_left'):
     selection = Selection.SINGLE_RACE
-  elif any_player_just_pressed('_right'):
+  elif AnyPlayer.just_pressed('_right'):
     selection = Selection.TOURNAMENT
+  Misc.set_value('main_menu_selection', selection)
   
-  var accepted = any_player_just_pressed('_power_up')
+  var accepted = AnyPlayer.just_pressed('_power_up')
   match selection:
     Selection.SINGLE_RACE:
       $ui/single_selection.visible = true
       $ui/tournament_selection.visible = false
       if accepted:
-        start_singleplayer()
+        Misc.set_value('game_mode', 'single_race')
     Selection.TOURNAMENT:
       $ui/single_selection.visible = false
       $ui/tournament_selection.visible = true
       if accepted:
-        start_singleplayer_tournament()
+        Misc.set_value('game_mode', 'tournament')
+  if accepted:
+    get_tree().change_scene_to_file('res://scenes/scenes/players_selection.tscn')
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_00v7d"]
