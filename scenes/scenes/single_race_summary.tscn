@@ -1,18 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmbqalf3026d2"]
+[gd_scene load_steps=4 format=3 uid="uid://bmbqalf3026d2"]
+
+[ext_resource type="Script" path="res://scripts/ui/ui.gd" id="1_7o0vc"]
+[ext_resource type="FontFile" uid="uid://vnj01hulxhqg" path="res://fonts/prstart.ttf" id="2_n014x"]
 
 [sub_resource type="GDScript" id="GDScript_effih"]
 script/source = "extends Control
 
 func get_race_positions_tally():
-  var text = ''
+  var text = 'RACE:\\n\\n'
   var players = RaceSettings.get_setting('players').duplicate()
   players.sort_custom(func(a,b): return Race.final_positions[a.id] < Race.final_positions[b.id])
   for player_index in range(len(players)):
-    text += str(player_index+1) + '. PLAYER ' + str(players[player_index].id) + '\\n'
+    text += str(player_index+1) + '. ' + str(players[player_index].id) + '\\n'
   return text
 
 func _ready():
-  $Label.text = get_race_positions_tally()
+  $ui/label.text = get_race_positions_tally()
 
 func _physics_process(delta):
   if AnyPlayer.just_pressed('_power_up'):
@@ -28,7 +31,25 @@ grow_horizontal = 2
 grow_vertical = 2
 script = SubResource("GDScript_effih")
 
-[node name="Label" type="Label" parent="."]
+[node name="background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ui" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 426.0
+offset_bottom = 320.0
+script = ExtResource("1_7o0vc")
+
+[node name="label" type="Label" parent="ui"]
+texture_filter = 1
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("2_n014x")
+theme_override_font_sizes/font_size = 8

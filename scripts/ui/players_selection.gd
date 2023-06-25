@@ -30,7 +30,7 @@ var two_player_settings = {
       input = ['human', 'p1'],
       start_spot = 0,
       is_main = true,
-      id = RaceSettings.generate_player_id(),
+      id = 'RED',
     },
     {
       texture = preload('res://textures/vehicles/car_blue.png'),
@@ -38,7 +38,7 @@ var two_player_settings = {
       input = ['human', 'p2'],
       start_spot = 1,
       is_main = false,
-      id = RaceSettings.generate_player_id(),
+      id = 'BLUE',
     },
   ],
   'laps': 3,
