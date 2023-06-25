@@ -18,6 +18,22 @@ const race_default_settings = {
       is_main = false,
       id = 'BLUE',
     },
+    {
+      texture = preload('res://textures/vehicles/car_green.png'),
+      viewport = null,
+      input = ['npc', ''],
+      start_spot = 2,
+      is_main = false,
+      id = 'JIM',
+    },
+    {
+      texture = preload('res://textures/vehicles/car_green.png'),
+      viewport = null,
+      input = ['npc', ''],
+      start_spot = 3,
+      is_main = false,
+      id = 'GREG',
+    },
   ],
   'laps': 1,
 }

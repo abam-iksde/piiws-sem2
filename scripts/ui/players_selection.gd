@@ -40,6 +40,8 @@ var two_player_settings = {
       is_main = false,
       id = 'BLUE',
     },
+    RaceSettings.race_default_settings['players'][2],
+    RaceSettings.race_default_settings['players'][3],
   ],
   'laps': 3,
 }
@@ -59,9 +61,17 @@ func _physics_process(delta):
       $ui/single_selection.visible = true
       $ui/multi_selection.visible = false
       if accepted:
-        Tournament.start(single_race if Misc.get_value('game_mode', 'single_race') == 'single_race' else test_tournament, get_singleplayer_settings(accepted))
+        if Misc.get_value('game_mode', 'single_race') == 'single_race':
+          Misc.set_value('race_settings', get_singleplayer_settings(accepted))
+          get_tree().change_scene_to_file('res://scenes/scenes/track_selection.tscn')
+        else:
+          Tournament.start(test_tournament, get_singleplayer_settings(accepted))
     Selection.MULTI:
       $ui/single_selection.visible = false
       $ui/multi_selection.visible = true
       if accepted:
-        Tournament.start(single_race if Misc.get_value('game_mode', 'single_race') == 'single_race' else test_tournament, two_player_settings)
+        if Misc.get_value('game_mode', 'single_race') == 'single_race':
+          Misc.set_value('race_settings', two_player_settings)
+          get_tree().change_scene_to_file('res://scenes/scenes/track_selection.tscn')
+        else:
+          Tournament.start(test_tournament, two_player_settings)

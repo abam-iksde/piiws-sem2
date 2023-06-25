@@ -56,6 +56,30 @@
                  "width":0,
                  "x":224,
                  "y":448
+                },
+                {
+                 "height":0,
+                 "id":13,
+                 "name":"3",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":256,
+                 "y":384
+                }, 
+                {
+                 "height":0,
+                 "id":14,
+                 "name":"4",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":224,
+                 "y":384
                 }],
          "opacity":1,
          "type":"objectgroup",

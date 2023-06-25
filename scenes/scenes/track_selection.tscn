@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=3 uid="uid://c362l2xlt3mag"]
+
+[ext_resource type="Script" path="res://scripts/ui/track_selection.gd" id="1_xiiea"]
+[ext_resource type="Script" path="res://scripts/ui/ui.gd" id="2_0mbs8"]
+[ext_resource type="FontFile" uid="uid://vnj01hulxhqg" path="res://fonts/prstart.ttf" id="3_cd066"]
+
+[node name="track_selection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xiiea")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ui" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 426.0
+offset_bottom = 320.0
+script = ExtResource("2_0mbs8")
+
+[node name="track1" type="Label" parent="ui"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -11.5
+offset_right = -4.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_cd066")
+theme_override_font_sizes/font_size = 8
+text = "TRACK 1"
+
+[node name="track2" type="Label" parent="ui"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -11.5
+offset_right = 60.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_cd066")
+theme_override_font_sizes/font_size = 8
+text = "TRACK 2"

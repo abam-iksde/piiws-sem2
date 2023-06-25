@@ -64,7 +64,7 @@ func transform_layers(layers, texture):
     transformed_layers.visual.append(transformed_layer)
   
   var start_spots = []
-  for i in range(len(layers.start_spots)):
+  for i in range(len(layers.start_spots['objects'])):
     for point in layers.start_spots['objects']:
       if point['name'] == str(i+1):
         start_spots.append(Vector2(point['x']/16.0 - 1.0, point['y']/16.0 - 1.0))
