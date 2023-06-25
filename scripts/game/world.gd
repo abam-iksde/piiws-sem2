@@ -5,7 +5,10 @@ const DirectionBoxScene = preload('res://scenes/prefabs/game/direction_box.tscn'
 
 func _ready():
   var loader = MapLoader.new()
-  var map_data = loader.load_map('res://maps/test_map/map.json', 'res://maps/test_map/set.png')
+  var map_data = loader.load_map(
+    Misc.get_value('track', 'res://maps/test_map/map.json'),
+    Misc.get_value('tileset', 'res://maps/test_map/set.png')
+  )
   build_map(map_data)
   Race.init.call_deferred($checkpoints.get_children())
 

@@ -2,27 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cju2lnks5vp14"
-path.s3tc="res://.godot/imported/shine.png-5e47154ed565bf257e72c2bab0d73a88.s3tc.ctex"
+uid="uid://cbomrkutnahsp"
+path="res://.godot/imported/tiles_carpet.png-c0e046d206af32fcbc24171e50c2ddc0.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/menu/shine.png"
-dest_files=["res://.godot/imported/shine.png-5e47154ed565bf257e72c2bab0d73a88.s3tc.ctex"]
+source_file="res://maps/track2/tiles_carpet.png"
+dest_files=["res://.godot/imported/tiles_carpet.png-c0e046d206af32fcbc24171e50c2ddc0.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
