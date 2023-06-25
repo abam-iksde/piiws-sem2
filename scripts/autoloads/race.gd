@@ -70,7 +70,7 @@ func next_checkpoint(checkpoint, lap, change=1):
   }
 
 func _physics_process(delta):
-  if Input.is_action_just_pressed('ui_accept') and is_race_finished() and not points_disbursed:
+  if AnyPlayer.just_pressed('_power_up') and is_race_finished() and not points_disbursed:
     end_race()
     Tournament.summarize_race()
     points_disbursed = true

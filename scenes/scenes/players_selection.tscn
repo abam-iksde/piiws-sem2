@@ -1,0 +1,147 @@
+[gd_scene load_steps=13 format=3 uid="uid://dghi2os2128e8"]
+
+[ext_resource type="Script" path="res://scripts/ui/players_selection.gd" id="1_8xki4"]
+[ext_resource type="Script" path="res://scripts/ui/ui.gd" id="1_as4qv"]
+[ext_resource type="Texture2D" uid="uid://cok2lg1koy8ky" path="res://textures/menu/option_background.png" id="2_bwtxp"]
+[ext_resource type="Shader" path="res://shaders/selection.gdshader" id="3_mg1hw"]
+[ext_resource type="Texture2D" uid="uid://bdlfeh52mt3u8" path="res://textures/menu/option_selection.png" id="4_w1cbw"]
+[ext_resource type="Shader" path="res://shaders/shine.gdshader" id="5_0m4ak"]
+[ext_resource type="Texture2D" uid="uid://cju2lnks5vp14" path="res://textures/menu/shine.png" id="6_03pt4"]
+[ext_resource type="Texture2D" uid="uid://pu3ndij6prmc" path="res://textures/menu/singleplayer.png" id="7_0m1bq"]
+[ext_resource type="Texture2D" uid="uid://dr8kbokthiuof" path="res://textures/menu/multiplayer.png" id="8_c4tiy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yt7s6"]
+shader = ExtResource("3_mg1hw")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ah7lh"]
+shader = ExtResource("5_0m4ak")
+shader_parameter/shine_texture = ExtResource("6_03pt4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wly78"]
+shader = ExtResource("3_mg1hw")
+
+[node name="players_selection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8xki4")
+
+[node name="background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ui" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 426.0
+offset_bottom = 320.0
+script = ExtResource("1_as4qv")
+
+[node name="single_background" type="TextureRect" parent="ui"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -161.5
+offset_top = -56.5
+offset_right = -38.5
+offset_bottom = 56.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bwtxp")
+
+[node name="single_selection" type="TextureRect" parent="ui"]
+visible = false
+texture_filter = 1
+material = SubResource("ShaderMaterial_yt7s6")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -161.5
+offset_top = -56.5
+offset_right = -38.5
+offset_bottom = 56.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_w1cbw")
+
+[node name="single" type="TextureRect" parent="ui"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_ah7lh")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -161.5
+offset_top = -56.5
+offset_right = -38.5
+offset_bottom = 56.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_0m1bq")
+
+[node name="multi_background" type="TextureRect" parent="ui"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 38.5
+offset_top = -56.5
+offset_right = 161.5
+offset_bottom = 56.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bwtxp")
+
+[node name="multi_selection" type="TextureRect" parent="ui"]
+visible = false
+texture_filter = 1
+material = SubResource("ShaderMaterial_wly78")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 38.5
+offset_top = -56.5
+offset_right = 161.5
+offset_bottom = 56.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_w1cbw")
+
+[node name="multi" type="TextureRect" parent="ui"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_ah7lh")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 38.5
+offset_top = -56.5
+offset_right = 161.5
+offset_bottom = 56.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_c4tiy")
