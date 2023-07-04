@@ -6,12 +6,12 @@ enum Selection {
 }
 
 var single_race = [
-  'res://scenes/scenes/race.tscn',
+  ['res://scenes/scenes/race.tscn'],
 ]
 
 var test_tournament = [
-  'res://scenes/scenes/race.tscn',
-  'res://scenes/scenes/race.tscn',
+  ['res://maps/test_map/map.json', 'res://maps/test_map/set.png'],
+  ['res://maps/track2/track2.json', 'res://maps/track2/tiles_carpet.png'],
 ]
 
 func get_singleplayer_settings(player):

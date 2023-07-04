@@ -12,7 +12,9 @@ func start(races_, settings):
   RaceSettings.race_settings = settings
   for player in RaceSettings.get_setting('players'):
     scores[player.id] = 0
-  get_tree().change_scene_to_file(races[0])
+  Misc.set_value('track', races[0][0])
+  Misc.set_value('tileset', races[0][1])
+  get_tree().change_scene_to_file('res://scenes/scenes/race.tscn')
 
 func summarize_race():
   for player in RaceSettings.get_setting('players'):
@@ -27,4 +29,6 @@ func advance():
   if current_race >= len(races):
     get_tree().change_scene_to_file('res://scenes/scenes/temp_menu.tscn')
     return
-  get_tree().change_scene_to_file(races[current_race])
+  Misc.set_value('track', races[current_race][0])
+  Misc.set_value('tileset', races[current_race][1])
+  get_tree().change_scene_to_file('res://scenes/scenes/race.tscn')
