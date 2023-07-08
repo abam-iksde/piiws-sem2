@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cju2lnks5vp14"
-path.s3tc="res://.godot/imported/shine.png-5e47154ed565bf257e72c2bab0d73a88.s3tc.ctex"
+path="res://.godot/imported/shine.png-5e47154ed565bf257e72c2bab0d73a88.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://textures/menu/shine.png"
-dest_files=["res://.godot/imported/shine.png-5e47154ed565bf257e72c2bab0d73a88.s3tc.ctex"]
+dest_files=["res://.godot/imported/shine.png-5e47154ed565bf257e72c2bab0d73a88.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
